@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TechZone Electronics — Best Deals on Gadgets</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --card: #1a1a26;
+  --border: rgba(255,255,255,0.07);
+  --fg: #f0f0ff;
+  --muted: #888899;
+  --cyan: #00e5ff;
+  --pink: #ff2d78;
+  --yellow: #ffd600;
+  --purple: #7c4dff;
+  --green: #00e676;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* Cursor */
+.cur{width:8px;height:8px;background:var(--cyan);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference;}
+.cur-ring{width:32px;height:32px;border:1.5px solid var(--cyan);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:0.4;transition:all 0.08s;}
+
+/* Grid background */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.2rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(10,10,15,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Exo 2',sans-serif;
+  font-weight:900;font-size:1.5rem;
+  letter-spacing:-0.02em;
+  display:flex;align-items:center;gap:4px;
+}
+.nav-logo .t1{color:var(--cyan);}
+.nav-logo .t2{color:var(--fg);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{
+  color:var(--muted);font-size:0.85rem;font-weight:500;
+  text-decoration:none;letter-spacing:0.04em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--cyan);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.nav-call{
+  background:var(--cyan);color:#000;
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.82rem;
+  padding:9px 20px;border-radius:8px;text-decoration:none;
+  letter-spacing:0.04em;transition:transform 0.2s,box-shadow 0.2s;
+  display:flex;align-items:center;gap:6px;
+}
+.nav-call:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,229,255,0.3);}
+.nav-wa{
+  background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.3);
+  color:var(--green);font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.82rem;
+  padding:9px 20px;border-radius:8px;text-decoration:none;
+  letter-spacing:0.04em;transition:all 0.2s;
+}
+.nav-wa:hover{background:rgba(0,230,118,0.2);}
+
+/* Hero */
+.hero{
+  min-height:100vh;
+  padding:9rem 3rem 5rem;
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+}
+.hero-glow{
+  position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;
+}
+.hero-glow.g1{width:500px;height:500px;background:var(--cyan);opacity:0.06;top:-100px;right:0;animation:pulse 6s ease-in-out infinite;}
+.hero-glow.g2{width:400px;height:400px;background:var(--pink);opacity:0.06;bottom:0;left:-100px;animation:pulse 8s ease-in-out infinite reverse;}
+.hero-glow.g3{width:300px;height:300px;background:var(--purple);opacity:0.08;top:40%;left:40%;animation:pulse 10s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+.hero-left{position:relative;z-index:2;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);
+  border-radius:100px;padding:6px 16px;
+  font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:2rem;
+  animation:fadeUp 0.7s ease both;
+}
+.badge-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+.hero-title{
+  font-family:'Exo 2',sans-serif;
+  font-weight:900;
+  font-size:clamp(2.8rem,6vw,5.5rem);
+  line-height:0.95;
+  letter-spacing:-0.03em;
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.7s 0.1s ease both;
+}
+.hero-title .line-cyan{color:var(--cyan);display:block;}
+.hero-title .line-pink{color:var(--pink);display:block;}
+
+.hero-sub{
+  font-size:1.05rem;color:var(--muted);line-height:1.7;
+  max-width:460px;margin-bottom:2.5rem;
+  animation:fadeUp 0.7s 0.2s ease both;
+}
+.hero-sub strong{color:var(--fg);}
+
+.hero-ctas{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  animation:fadeUp 0.7s 0.3s ease both;
+}
+.btn-cyan{
+  background:var(--cyan);color:#000;
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.9rem;
+  padding:13px 28px;border-radius:8px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform 0.2s,box-shadow 0.2s;
+  letter-spacing:0.03em;
+}
+.btn-cyan:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,229,255,0.3);}
+.btn-outline{
+  border:1.5px solid var(--border);color:var(--fg);
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.9rem;
+  padding:13px 28px;border-radius:8px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s;letter-spacing:0.03em;
+}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* Hero right — product showcase */
+.hero-right{
+  position:relative;z-index:2;
+  animation:fadeUp 0.7s 0.2s ease both;
+}
+.hero-showcase{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero-showcase::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple),var(--yellow));
+}
+.featured-label{
+  font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:1.2rem;display:flex;align-items:center;gap:8px;
+}
+.featured-label::before{content:'★';font-size:0.8rem;}
+.product-big{
+  background:var(--card);border-radius:14px;padding:1.8rem;
+  margin-bottom:1rem;border:1px solid var(--border);
+  display:flex;align-items:center;gap:1.5rem;
+  transition:border-color 0.2s;
+}
+.product-big:hover{border-color:var(--cyan);}
+.prod-icon{font-size:3.5rem;flex-shrink:0;}
+.prod-info h3{font-family:'Exo 2',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:4px;}
+.prod-info p{font-size:0.82rem;color:var(--muted);margin-bottom:10px;}
+.prod-price{font-family:'Exo 2',sans-serif;font-weight:800;font-size:1.3rem;color:var(--cyan);}
+.prod-price .old{font-size:0.8rem;color:var(--muted);text-decoration:line-through;margin-left:8px;font-weight:400;}
+.small-products{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+.prod-small{
+  background:var(--card);border-radius:10px;padding:1rem;
+  border:1px solid var(--border);text-align:center;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.prod-small:hover{border-color:var(--pink);transform:translateY(-2px);}
+.prod-small .icon{font-size:2rem;margin-bottom:0.5rem;display:block;}
+.prod-small h4{font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.85rem;margin-bottom:4px;}
+.prod-small .price{font-size:0.82rem;color:var(--yellow);font-weight:600;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* Stats strip */
+.stats{
+  display:flex;justify-content:space-around;flex-wrap:wrap;
+  padding:2rem 3rem;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+  position:relative;z-index:1;
+}
+.stat{text-align:center;padding:0.5rem 1rem;}
+.stat-num{
+  font-family:'Exo 2',sans-serif;font-weight:900;
+  font-size:2rem;line-height:1;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-label{font-size:0.75rem;color:var(--muted);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase;}
+
+/* Section */
+section{padding:6rem 3rem;position:relative;z-index:1;}
+.sec-label{
+  font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;
+  font-weight:600;color:var(--cyan);margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-label::before{content:'';width:24px;height:2px;background:var(--cyan);}
+.sec-title{
+  font-family:'Exo 2',sans-serif;font-weight:900;
+  font-size:clamp(2rem,4vw,3rem);line-height:1.05;
+  letter-spacing:-0.025em;margin-bottom:0.75rem;
+}
+.sec-sub{color:var(--muted);font-size:0.95rem;line-height:1.7;max-width:480px;margin-bottom:3rem;}
+
+/* Products grid */
+#products{background:var(--surface);}
+.products-filter{
+  display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2.5rem;
+}
+.filter-btn{
+  padding:8px 20px;border-radius:8px;font-size:0.82rem;font-weight:600;
+  cursor:pointer;border:1.5px solid var(--border);
+  background:transparent;color:var(--muted);
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+  letter-spacing:0.04em;
+}
+.filter-btn.active,.filter-btn:hover{
+  background:var(--cyan);color:#000;border-color:var(--cyan);
+}
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1.2rem;
+}
+.product-card{
+  background:var(--card);border-radius:16px;
+  border:1px solid var(--border);overflow:hidden;
+  transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;
+  position:relative;
+}
+.product-card:hover{transform:translateY(-5px);border-color:var(--cyan);box-shadow:0 12px 40px rgba(0,229,255,0.1);}
+.card-thumb{
+  height:160px;display:flex;align-items:center;justify-content:center;
+  font-size:4rem;position:relative;
+}
+.card-thumb.ct1{background:linear-gradient(135deg,#001a2e,#003d5c);}
+.card-thumb.ct2{background:linear-gradient(135deg,#1a001a,#3d0030);}
+.card-thumb.ct3{background:linear-gradient(135deg,#0a1a00,#1a3d00);}
+.card-thumb.ct4{background:linear-gradient(135deg,#1a1400,#3d3000);}
+.card-thumb.ct5{background:linear-gradient(135deg,#0a001a,#20003d);}
+.card-thumb.ct6{background:linear-gradient(135deg,#001a1a,#003d3d);}
+.card-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:3px 10px;border-radius:100px;
+}
+.badge-sale{background:var(--pink);color:#fff;}
+.badge-new{background:var(--green);color:#000;}
+.badge-hot{background:var(--yellow);color:#000;}
+.card-body{padding:1.2rem;}
+.card-body h3{font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:4px;}
+.card-body p{font-size:0.78rem;color:var(--muted);margin-bottom:0.8rem;line-height:1.5;}
+.card-footer{display:flex;justify-content:space-between;align-items:center;}
+.card-price{font-family:'Exo 2',sans-serif;font-weight:800;font-size:1.05rem;color:var(--cyan);}
+.card-old{font-size:0.72rem;color:var(--muted);text-decoration:line-through;}
+.card-btn{
+  background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.2);
+  color:var(--cyan);font-size:0.75rem;font-weight:600;
+  padding:6px 14px;border-radius:6px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:all 0.2s;
+}
+.card-btn:hover{background:var(--cyan);color:#000;}
+
+/* Why us */
+.why-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.5rem;
+}
+.why-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:2rem;
+  transition:border-color 0.25s,transform 0.25s;
+  position:relative;overflow:hidden;
+}
+.why-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  opacity:0;transition:opacity 0.3s;
+}
+.why-card:nth-child(1)::before{background:var(--cyan);}
+.why-card:nth-child(2)::before{background:var(--pink);}
+.why-card:nth-child(3)::before{background:var(--yellow);}
+.why-card:nth-child(4)::before{background:var(--purple);}
+.why-card:hover{border-color:rgba(255,255,255,0.15);transform:translateY(-4px);}
+.why-card:hover::before{opacity:1;}
+.why-icon{font-size:2.2rem;margin-bottom:1rem;display:block;}
+.why-card h3{font-family:'Exo 2',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem;}
+.why-card p{font-size:0.83rem;color:var(--muted);line-height:1.6;}
+
+/* Brands */
+#brands{background:var(--surface);}
+.brands-grid{
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;
+}
+.brand-pill{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:100px;padding:10px 24px;
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.9rem;
+  letter-spacing:0.04em;transition:all 0.2s;
+}
+.brand-pill:nth-child(odd):hover{border-color:var(--cyan);color:var(--cyan);}
+.brand-pill:nth-child(even):hover{border-color:var(--pink);color:var(--pink);}
+
+/* Contact */
+#contact{background:var(--bg);}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;
+}
+.contact-left h2{
+  font-family:'Exo 2',sans-serif;font-weight:900;
+  font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.05;
+  letter-spacing:-0.025em;margin-bottom:1rem;
+}
+.contact-left h2 span{color:var(--cyan);}
+.contact-left p{color:var(--muted);line-height:1.7;margin-bottom:2rem;}
+.cinfo{display:flex;flex-direction:column;gap:1rem;}
+.cinfo-row{
+  display:flex;align-items:center;gap:14px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:1rem 1.2rem;
+  transition:border-color 0.2s;
+}
+.cinfo-row:hover{border-color:var(--cyan);}
+.cinfo-icon{font-size:1.3rem;flex-shrink:0;}
+.cinfo-val{font-weight:600;font-size:0.9rem;}
+.cinfo-desc{font-size:0.75rem;color:var(--muted);}
+
+.contact-form{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;
+  position:relative;overflow:hidden;
+}
+.contact-form::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+}
+.contact-form h3{
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:1.3rem;
+  margin-bottom:1.5rem;
+}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
+.field label{font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+.field input,.field textarea,.field select{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:10px;padding:12px 16px;
+  color:var(--fg);font-family:'DM Sans',sans-serif;font-size:0.9rem;
+  outline:none;transition:border-color 0.2s,box-shadow 0.2s;width:100%;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,0.1);
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,0.2);}
+.field textarea{resize:vertical;min-height:100px;}
+.field select option{background:var(--card);}
+.btn-send{
+  width:100%;background:var(--cyan);color:#000;
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.95rem;
+  padding:14px;border-radius:10px;border:none;cursor:pointer;
+  letter-spacing:0.04em;transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-send:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,229,255,0.3);}
+
+/* Footer */
+footer{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding:3rem 3rem 1.5rem;
+  position:relative;z-index:1;
+}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;
+  padding-bottom:2rem;border-bottom:1px solid var(--border);
+}
+.footer-logo{
+  font-family:'Exo 2',sans-serif;font-weight:900;font-size:1.5rem;
+  margin-bottom:0.75rem;
+}
+.footer-logo .t1{color:var(--cyan);}
+.footer-desc{color:var(--muted);font-size:0.85rem;line-height:1.6;max-width:280px;}
+.footer-col h4{
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.9rem;
+  margin-bottom:1rem;color:var(--fg);
+}
+.footer-col a{
+  display:block;color:var(--muted);font-size:0.83rem;
+  text-decoration:none;margin-bottom:0.6rem;transition:color 0.2s;
+}
+.footer-col a:hover{color:var(--cyan);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.5rem;font-size:0.78rem;color:var(--muted);
+  flex-wrap:wrap;gap:1rem;
+}
+
+/* Reveal */
+.rev{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.rev.in{opacity:1;transform:translateY(0);}
+.rev-d1{transition-delay:0.1s;}
+.rev-d2{transition-delay:0.2s;}
+.rev-d3{transition-delay:0.3s;}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;
+  background:var(--green);color:#000;
+  padding:12px 22px;border-radius:10px;
+  font-size:0.88rem;font-weight:600;
+  transform:translateY(80px);opacity:0;
+  transition:all 0.4s;z-index:999;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.2rem;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:7rem 1.2rem 3rem;gap:2rem;}
+  .hero-right{display:none;}
+  section{padding:4rem 1.2rem;}
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .stats{padding:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span class="t1">Tech</span><span class="t2">Zone</span></div>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:+919813076190" class="nav-call">📞 Call Now</a>
+    <a href="https://wa.me/919813076190" target="_blank" class="nav-wa">💬 WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow g1"></div>
+  <div class="hero-glow g2"></div>
+  <div class="hero-glow g3"></div>
+
+  <div class="hero-left">
+    <div class="hero-badge"><span class="badge-dot"></span> Ambala's #1 Electronics Store</div>
+    <h1 class="hero-title">
+      Best Deals<br>
+      <span class="line-cyan">On Latest</span>
+      <span class="line-pink">Gadgets!</span>
+    </h1>
+    <p class="hero-sub">
+      <strong>TechZone Electronics</strong> brings you the latest smartphones, laptops, TVs and accessories at the best prices in Ambala. Genuine products. Expert service.
+    </p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-cyan">Shop Now →</a>
+      <a href="#contact" class="btn-outline">Visit Store</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-showcase">
+      <div class="featured-label">Featured Deal of the Day</div>
+      <div class="product-big">
+        <div class="prod-icon">📱</div>
+        <div class="prod-info">
+          <h3>Samsung Galaxy S24</h3>
+          <p>256GB · Phantom Black · 5G</p>
+          <div class="prod-price">₹72,999 <span class="old">₹89,999</span></div>
+        </div>
+      </div>
+      <div class="small-products">
+        <div class="prod-small">
+          <span class="icon">💻</span>
+          <h4>MacBook Air M2</h4>
+          <div class="price">₹1,09,999</div>
+        </div>
+        <div class="prod-small">
+          <span class="icon">🎧</span>
+          <h4>Sony WH-1000XM5</h4>
+          <div class="price">₹24,999</div>
+        </div>
+        <div class="prod-small">
+          <span class="icon">📺</span>
+          <h4>LG 55" 4K TV</h4>
+          <div class="price">₹54,999</div>
+        </div>
+        <div class="prod-small">
+          <span class="icon">⌚</span>
+          <h4>Apple Watch S9</h4>
+          <div class="price">₹41,999</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">5000+</div><div class="stat-label">Happy Customers</div></div>
+  <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Products</div></div>
+  <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Years Experience</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Genuine Products</div></div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="sec-label">Our Collection</div>
+  <h2 class="sec-title rev">Top Selling Products</h2>
+  <p class="sec-sub rev">Latest gadgets at the best prices. All products come with official warranty.</p>
+  <div class="products-filter rev">
+    <button class="filter-btn active" onclick="filterProducts(this,'all')">All</button>
+    <button class="filter-btn" onclick="filterProducts(this,'phone')">Smartphones</button>
+    <button class="filter-btn" onclick="filterProducts(this,'laptop')">Laptops</button>
+    <button class="filter-btn" onclick="filterProducts(this,'audio')">Audio</button>
+    <button class="filter-btn" onclick="filterProducts(this,'tv')">TVs</button>
+  </div>
+  <div class="products-grid" id="productsGrid">
+    <div class="product-card rev rev-d1" data-cat="phone">
+      <div class="card-thumb ct1">📱<span class="card-badge badge-hot">🔥 Hot</span></div>
+      <div class="card-body">
+        <h3>iPhone 15 Pro Max</h3>
+        <p>256GB · Titanium · A17 Pro chip</p>
+        <div class="card-footer">
+          <div><div class="card-price">₹1,59,999</div><div class="card-old">₹1,79,999</div></div>
+          <button class="card-btn" onclick="inquire('iPhone 15 Pro Max')">Enquire</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card rev rev-d2" data-cat="laptop">
+      <div class="card-thumb ct2">💻<span class="card-badge badge-new">New</span></div>
+      <div class="card-body">
+        <h3>MacBook Pro M3</h3>
+        <p>14" · 16GB RAM · 512GB SSD</p>
+        <div class="card-footer">
+          <div><div class="card-price">₹1,99,999</div><div class="card-old">₹2,19,999</div></div>
+          <button class="card-btn" onclick="inquire('MacBook Pro M3')">Enquire</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card rev rev-d3" data-cat="audio">
+      <div class="card-thumb ct3">🎧<span class="card-badge badge-sale">Sale</span></div>
+      <div class="card-body">
+        <h3>Sony WH-1000XM5</h3>
+        <p>Noise Cancelling · 30hr battery</p>
+        <div class="card-footer">
+          <div><div class="card-price">₹24,999</div><div class="card-old">₹34,990</div></div>
+          <button class="card-btn" onclick="inquire('Sony WH-1000XM5')">Enquire</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card rev" data-cat="tv">
+      <div class="card-thumb ct4">📺<span class="card-badge badge-sale">Sale</span></div>
+      <div class="card-body">
+        <h3>Samsung 65" QLED 4K</h3>
+        <p>Smart TV · HDR · Gaming Mode</p>
+        <div class="card-footer">
+          <div><div class="card-price">₹89,999</div><div class="card-old">₹1,19,999</div></div>
+          <button class="card-btn" onclick="inquire('Samsung 65 QLED TV')">Enquire</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card rev rev-d1" data-cat="phone">
+      <div class="card-thumb ct5">📱<span class="card-badge badge-new">New</span></div>
+      <div class="card-body">
+        <h3>Samsung Galaxy S24 Ultra</h3>
+        <p>512GB · Titanium Gray · S Pen</p>
+        <div class="card-footer">
+          <div><div class="card-price">₹1,29,999</div><div class="card-old">₹1,49,999</div></div>
+          <button class="card-btn" onclick="inquire('Samsung Galaxy S24 Ultra')">Enquire</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card rev rev-d2" data-cat="laptop">
+      <div class="card-thumb ct6">💻<span class="card-badge badge-hot">🔥 Hot</span></div>
+      <div class="card-body">
+        <h3>Dell XPS 15</h3>
+        <p>Intel i9 · 32GB RAM · RTX 4060</p>
+        <div class="card-footer">
+          <div><div class="card-price">₹1,74,999</div><div class="card-old">₹1,99,999</div></div>
+          <button class="card-btn" onclick="inquire('Dell XPS 15')">Enquire</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" style="background:var(--surface)">
+  <div class="sec-label">Why TechZone</div>
+  <h2 class="sec-title rev">Why customers choose us</h2>
+  <p class="sec-sub rev">We've been serving Ambala for 15+ years with trust and quality.</p>
+  <div class="why-grid">
+    <div class="why-card rev rev-d1">
+      <span class="why-icon">✅</span>
+      <h3>100% Genuine Products</h3>
+      <p>Every product we sell is 100% original with official brand warranty. No duplicates, ever.</p>
+    </div>
+    <div class="why-card rev rev-d2">
+      <span class="why-icon">💰</span>
+      <h3>Best Price Guarantee</h3>
+      <p>Find it cheaper anywhere in Ambala? We'll match the price. No questions asked.</p>
+    </div>
+    <div class="why-card rev rev-d3">
+      <span class="why-icon">🔧</span>
+      <h3>Expert Service Center</h3>
+      <p>Certified technicians for all brands. Quick repairs with genuine spare parts.</p>
+    </div>
+    <div class="why-card rev">
+      <span class="why-icon">🚚</span>
+      <h3>Free Home Delivery</h3>
+      <p>Free delivery anywhere in Ambala and nearby areas. Same day delivery available!</p>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section id="brands">
+  <div class="sec-label">Our Brands</div>
+  <h2 class="sec-title rev">Authorised dealer for top brands</h2>
+  <p class="sec-sub rev">We are official authorised dealers — get genuine products with full warranty.</p>
+  <div class="brands-grid rev">
+    <div class="brand-pill">Apple</div>
+    <div class="brand-pill">Samsung</div>
+    <div class="brand-pill">Sony</div>
+    <div class="brand-pill">LG</div>
+    <div class="brand-pill">Dell</div>
+    <div class="brand-pill">HP</div>
+    <div class="brand-pill">Lenovo</div>
+    <div class="brand-pill">OnePlus</div>
+    <div class="brand-pill">Xiaomi</div>
+    <div class="brand-pill">Boat</div>
+    <div class="brand-pill">JBL</div>
+    <div class="brand-pill">Realme</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label">Visit Us</div>
+  <div class="contact-grid">
+    <div class="contact-left rev">
+      <h2>Visit our store in <span>Ambala</span></h2>
+      <p>Come visit us or contact us online. Our experts will help you find the perfect gadget within your budget.</p>
+      <div class="cinfo">
+        <div class="cinfo-row">
+          <div class="cinfo-icon">📍</div>
+          <div><div class="cinfo-val">Shop No. 12, Electronics Market, Ambala City</div><div class="cinfo-desc">Haryana, India — 134003</div></div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">📞</div>
+          <div><div class="cinfo-val">+91 98130 76190</div><div class="cinfo-desc">Mon–Sat, 10am–8pm</div></div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">💬</div>
+          <div><div class="cinfo-val">WhatsApp for quick response</div><div class="cinfo-desc">Usually replies in minutes</div></div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">🕐</div>
+          <div><div class="cinfo-val">Mon – Sat: 10:00 AM – 8:00 PM</div><div class="cinfo-desc">Sunday: 11:00 AM – 6:00 PM</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form rev rev-d2">
+      <h3>Send an Enquiry</h3>
+      <div class="field"><label>Your Name</label><input type="text" placeholder="e.g. Rahul Sharma" id="fname"/></div>
+      <div class="field"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 XXXXX XXXXX" id="fphone"/></div>
+      <div class="field">
+        <label>Product Interest</label>
+        <select id="fprod">
+          <option>Select category...</option>
+          <option>Smartphones</option>
+          <option>Laptops</option>
+          <option>TVs</option>
+          <option>Audio / Headphones</option>
+          <option>Smartwatches</option>
+          <option>Accessories</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label>Budget Range</label><input type="text" placeholder="e.g. ₹20,000 – ₹50,000" id="fbudget"/></div>
+      <div class="field"><label>Message</label><textarea placeholder="Tell us what you're looking for..." id="fmsg"></textarea></div>
+      <button class="btn-send" onclick="sendEnquiry()">Send Enquiry ⚡</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo"><span class="t1">Tech</span>Zone</div>
+      <div class="footer-desc">Ambala's most trusted electronics store since 2009. Genuine products, best prices, expert service.</div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#products">Products</a>
+      <a href="#why">Why Us</a>
+      <a href="#brands">Brands</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+919813076190">+91 98130 76190</a>
+      <a href="https://wa.me/919813076190" target="_blank">WhatsApp Us</a>
+      <a href="#contact">Visit Store</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 TechZone Electronics. All rights reserved.</span>
+    <span>Built by <a href="https://portfolio-rho-tan-jh9oenbyop.vercel.app/" target="_blank" style="color:var(--cyan)">Pulkit Kangra</a> 💙</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">✅ Enquiry sent! We'll call you shortly.</div>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.transform=`translate(${mx-4}px,${my-4}px)`;
+});
+(function a(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  curR.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(a);})();
+
+// Scroll reveal
+const revs=document.querySelectorAll('.rev');
+const obs=new IntersectionObserver(e=>e.forEach(r=>{if(r.isIntersecting)r.target.classList.add('in');}),{threshold:0.1});
+revs.forEach(r=>obs.observe(r));
+
+// Filter
+function filterProducts(btn, cat){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';
+  });
+}
+
+// Enquire
+function inquire(product){
+  window.open(`https://wa.me/919813076190?text=Hi! I'm interested in ${encodeURIComponent(product)}. Please share more details.`,'_blank');
+}
+
+// Form
+function sendEnquiry(){
+  const name=document.getElementById('fname').value;
+  const phone=document.getElementById('fphone').value;
+  const prod=document.getElementById('fprod').value;
+  const budget=document.getElementById('fbudget').value;
+  const msg=document.getElementById('fmsg').value;
+  if(!name||!phone){alert('Please enter your name and phone number!');return;}
+  const wa=`Hi TechZone! I want to enquire about electronics.\n\nName: ${name}\nPhone: ${phone}\nCategory: ${prod}\nBudget: ${budget}\nMessage: ${msg}`;
+  window.open(`https://wa.me/919813076190?text=${encodeURIComponent(wa)}`,'_blank');
+  const t=document.getElementById('toast');
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);
+}
+</script>
+</body>
+</html>

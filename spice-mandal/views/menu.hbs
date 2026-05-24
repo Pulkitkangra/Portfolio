@@ -1,0 +1,26 @@
+<div style="padding:10rem 5% 7rem;background:var(--charcoal);min-height:60vh;">
+  <div style="text-align:center;margin-bottom:4rem;" class="reveal">
+    <span class="section-label gold">Full Menu</span>
+    <h1 class="section-title light">Our <em>Complete</em> Menu</h1>
+    <p class="section-body light" style="margin-top:1rem;max-width:500px;margin-left:auto;margin-right:auto;">Every dish is crafted from heirloom recipes, cooked with 100% organic ingredients sourced from partner farms across India.</p>
+  </div>
+  {{#each menu}}
+  <div style="margin-bottom:4rem;" class="reveal">
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;padding-bottom:0.8rem;border-bottom:1px solid rgba(250,245,236,0.08);">{{@key}}</h2>
+    <div class="menu-grid">
+      {{#each this}}
+      <div class="menu-item" data-cat="{{@../key}}">
+        <div>
+          <span class="item-tag">{{this.tag}}</span>
+          <div class="item-name">{{this.name}}</div>
+          <div class="item-desc">{{this.desc}}</div>
+          <div class="item-allergens">{{#each this.badges}}<span class="allergen">{{this}}</span>{{/each}}</div>
+        </div>
+        <div class="item-price">{{this.price}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{/each}}
+  <p class="menu-note" style="margin-top:3rem;">V = Vegetarian · VG = Vegan · GF = Gluten Free · DF = Dairy Free · NF = Nut Free<br>Prices inclusive of all taxes. Menu subject to seasonal availability.</p>
+</div>

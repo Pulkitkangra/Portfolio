@@ -1,0 +1,31 @@
+<div style="padding:10rem 5% 7rem;background:var(--ivory);">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;margin-bottom:6rem;" class="reveal">
+    <div>
+      <span class="section-label">Our Story</span>
+      <h1 class="section-title">Born from spice,<br><em>rooted</em> in heritage</h1>
+      <div class="ornament"><div class="ornament-gem"></div></div>
+      <p class="section-body">Founded in 2012 by Chef Arjun Sharma, Spice Mandal began with a single mission: to resurrect India's endangered royal recipes and serve them with the elegance they deserve. Our kitchen draws from the Mughal courts of Lucknow, the Rajput kitchens of Rajasthan, and the coastal homes of Kerala.</p>
+      <p class="section-body" style="margin-top:1rem;">Today, twelve years on, we have served over 60,000 guests, won eight national awards, and built enduring partnerships with 14 organic farms across Himachal Pradesh, Kerala, and Rajasthan.</p>
+    </div>
+    <div style="background:var(--charcoal);border-radius:8px;height:400px;display:flex;align-items:center;justify-content:center;font-size:8rem;position:relative;overflow:hidden;">
+      🪔
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(200,98,26,0.15),transparent 70%);"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:6rem;">
+    <div style="text-align:center;margin-bottom:3rem;" class="reveal">
+      <span class="section-label">The Masters</span>
+      <h2 class="section-title">Meet our <em>karigars</em></h2>
+    </div>
+    <div class="chefs-grid reveal">
+      {{#each chefs}}
+      <div class="chef-card">
+        <div class="chef-portrait">{{this.emoji}}<div class="chef-badge">{{this.badge}}</div><div class="chef-award">{{this.award}}</div></div>
+        <div class="chef-name">{{this.name}}</div>
+        <div class="chef-role">{{this.role}}</div>
+        <p class="chef-bio">{{this.bio}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

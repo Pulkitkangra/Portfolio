@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{title}}</title>
+<meta name="description" content="Spice Mandal — Authentic Indian fine dining in the heart of Connaught Place, New Delhi. Awadhi cuisine, live tandoor kitchen, curated Indian spirits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="loading">
+
+<!-- PAGE LOADER -->
+<div id="loader">
+  <div class="loader-om">🪔</div>
+  <div class="loader-logo">Spice <em>Mandal</em></div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <div class="drawer-logo">Spice <em>Mandal</em></div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/menu" onclick="closeDrawer()">Menu</a>
+  <a href="/about" onclick="closeDrawer()">Our Story</a>
+  <a href="/#chefs" onclick="closeDrawer()">Chefs</a>
+  <a href="/#testimonials" onclick="closeDrawer()">Reviews</a>
+  <a href="/contact" onclick="closeDrawer()">Contact</a>
+  <a href="/reservation" class="drawer-reserve" onclick="closeDrawer()">Reserve a Table</a>
+  <div class="drawer-contact">
+    <span>📞 +91 98765 43210</span>
+    <span>📍 Connaught Place, New Delhi</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="/">Spice <em>Mandal</em></a>
+  <ul class="nav-center">
+    <li><a href="/" class="{{#if (eq activePage 'home')}}active{{/if}}">Home</a></li>
+    <li><a href="/menu" class="{{#if (eq activePage 'menu')}}active{{/if}}">Menu</a></li>
+    <li><a href="/about" class="{{#if (eq activePage 'about')}}active{{/if}}">Our Story</a></li>
+    <li><a href="/#chefs">Chefs</a></li>
+    <li><a href="/contact" class="{{#if (eq activePage 'contact')}}active{{/if}}">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-tel" href="tel:+919876543210">📞 +91 98765 43210</a>
+    <a class="nav-reserve" href="/reservation">Reserve</a>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-info">
+    <span>📍 <strong>Connaught Place, New Delhi</strong></span>
+    <span>🕐 Open Today <strong>12PM – 11PM</strong></span>
+    <span>🏆 Times Food Award Winner</span>
+  </div>
+  <a href="/reservation">Reserve a Table →</a>
+</div>
+
+<!-- PAGE CONTENT -->
+{{{body}}}
+
+<!-- FLOATING BUTTONS -->
+<div class="floating-btns">
+  <a class="float-btn float-wa" href="https://wa.me/919876543210" target="_blank" title="WhatsApp Us">💬</a>
+  <button class="float-btn float-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="f-logo">Spice <em>Mandal</em></div>
+      <p>Fine dining rooted in India's royal culinary heritage. Every dish at Spice Mandal is a journey through tradition — elevated with the finest seasonal ingredients and served with genuine Indian hospitality.</p>
+      <div class="award-row">
+        <span class="f-award">⭐ Times Food 2024</span>
+        <span class="f-award">🏆 Best Fine Dining Delhi</span>
+        <span class="f-award">🌿 100% Organic</span>
+      </div>
+      <div class="f-socials">
+        <a class="f-social" href="https://instagram.com/spicemandal" target="_blank">ig</a>
+        <a class="f-social" href="https://facebook.com/spicemandal" target="_blank">fb</a>
+        <a class="f-social" href="https://twitter.com/spicemandal" target="_blank">tw</a>
+      </div>
+    </div>
+    <div class="f-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/menu">Menu</a></li>
+        <li><a href="/about">Our Story</a></li>
+        <li><a href="/#chefs">Chefs</a></li>
+        <li><a href="/#testimonials">Reviews</a></li>
+        <li><a href="/reservation">Reserve</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Dining</h4>
+      <ul>
+        <li><a href="/menu">Tasting Menu</a></li>
+        <li><a href="/menu">Vegetarian Menu</a></li>
+        <li><a href="/reservation">Private Dining</a></li>
+        <li><a href="/reservation">Corporate Events</a></li>
+        <li><a href="/reservation">Wedding Parties</a></li>
+        <li><a href="/contact">Gift Vouchers</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Hours & Contact</h4>
+      <div class="f-hours">
+        <div class="f-hour-row"><span class="day">Mon – Thu</span><span>12 PM – 11 PM</span></div>
+        <div class="f-hour-row"><span class="day">Fri – Sat</span><span>12 PM – 11:30 PM</span></div>
+        <div class="f-hour-row"><span class="day">Sunday</span><span>12 PM – 10:30 PM</span></div>
+      </div>
+      <div class="f-contact-list">
+        <a href="tel:+919876543210">📞 +91 98765 43210</a>
+        <a href="mailto:reservations@spicemandal.in">✉️ reservations@spicemandal.in</a>
+        <span>📍 12, Connaught Place, New Delhi</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© {{year}} Spice Mandal. All rights reserved. Crafted with spice and soul in New Delhi, India 🇮🇳</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

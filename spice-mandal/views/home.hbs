@@ -1,0 +1,402 @@
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-mesh"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-paisley"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Authentic Indian Fine Dining · Est. {{restaurant.established}} · New Delhi</div>
+    <h1>Spice<br><em>&amp;</em> <span>Soul</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Royal Awadhi Cuisine · Live Tandoor Kitchen · Connaught Place</p>
+    <div class="hero-actions">
+      <a class="btn-hero" href="/reservation">Reserve Your Table ↗</a>
+      <a class="btn-hero-ghost" href="/menu">Explore Menu</a>
+    </div>
+    <div class="hero-badges">
+      {{#each awards}}
+      <div class="hero-badge">
+        <span class="badge-icon">{{this.icon}}</span>
+        <span class="badge-text">{{this.label}}</span>
+      </div>
+      {{#unless @last}}<div class="hero-badge-sep"></div>{{/unless}}
+      {{/each}}
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-text">Scroll</div>
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="strip-item"><span class="s-icon">⏰</span> Mon – Sat · 12:00 PM – 11:30 PM</div>
+  <div class="strip-sep"></div>
+  <div class="strip-item"><span class="s-icon">📍</span> 12, Connaught Place, New Delhi</div>
+  <div class="strip-sep"></div>
+  <div class="strip-item"><span class="s-icon">📞</span> +91 98765 43210</div>
+  <div class="strip-sep"></div>
+  <div class="strip-item"><span class="s-icon">🌶️</span> 60+ Heritage Recipes</div>
+  <div class="strip-sep"></div>
+  <div class="strip-item"><span class="s-icon">🌿</span> 100% Organic Ingredients</div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="about-visual">
+    <div class="about-art">
+      <div class="mandala-wrap">
+        <div class="mandala-ring outer"></div>
+        <div class="mandala-ring middle"></div>
+        <div class="mandala-ring inner"></div>
+        <div class="mandala-center">🪔</div>
+      </div>
+    </div>
+    <div class="about-card top-right">
+      <div class="card-num">12<span class="accent">+</span></div>
+      <div class="card-label">Years of Mastery</div>
+    </div>
+    <div class="about-card bottom-left">
+      <div class="card-num">60<span class="accent">k</span></div>
+      <div class="card-label">Guests Delighted</div>
+    </div>
+    <div class="award-badge-circle">
+      <span class="ab-star">⭐</span>
+      <span class="ab-text">Times Food<br>Award</span>
+    </div>
+  </div>
+  <div class="about-text reveal-right">
+    <span class="section-label">Our Story</span>
+    <h2 class="section-title">Born from spice,<br><em>rooted</em> in tradition</h2>
+    <div class="ornament"><div class="ornament-gem"></div></div>
+    <p class="section-body">Spice Mandal was founded in 2012 with one unwavering purpose — to bring India's endangered royal recipes back to the table. Our kitchen draws from the Mughal courts of Lucknow, the Rajput kitchens of Rajasthan, and the coastal homes of Kerala, treating every dish as a living piece of cultural heritage.</p>
+    <p class="section-body" style="margin-top:1rem;">We source 100% organic ingredients from partner farms in Himachal, Kerala, and Rajasthan. Our spice blends are ground fresh daily. Our bread is hand-shaped and fired in a 480°C clay tandoor — exactly as it has been for centuries.</p>
+    <div class="checklist" style="margin-top:1.8rem;">
+      <div class="check-item"><div class="check-diamond"></div> 60+ heirloom recipes from India's royal culinary lineage</div>
+      <div class="check-item"><div class="check-diamond"></div> 100% organic, farm-to-table produce sourced pan-India</div>
+      <div class="check-item"><div class="check-diamond"></div> Traditional clay tandoor fired to 480°C daily</div>
+      <div class="check-item"><div class="check-diamond"></div> Private dining for intimate gatherings and weddings</div>
+    </div>
+    <div class="about-stats">
+      <div class="about-stat">
+        <div class="num">60<sub>k</sub></div>
+        <div class="lbl">Guests Served</div>
+      </div>
+      <div class="about-stat">
+        <div class="num">8<sub>+</sub></div>
+        <div class="lbl">Awards Won</div>
+      </div>
+      <div class="about-stat">
+        <div class="num">4.8<sub>★</sub></div>
+        <div class="lbl">Google Rating</div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <a class="btn-primary" href="/about">Our Full Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU PREVIEW ── -->
+<section id="menu-preview" style="background:var(--charcoal);padding:7rem 5%;">
+  <div class="menu-top reveal">
+    <div>
+      <span class="section-label gold">Seasonal Menu</span>
+      <h2 class="section-title light">Crafted with <em>spice</em><br>and devotion</h2>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="switchMenu(this,'starters')">Starters</button>
+      <button class="tab-btn" onclick="switchMenu(this,'mains')">Mains</button>
+      <button class="tab-btn" onclick="switchMenu(this,'desserts')">Desserts</button>
+      <button class="tab-btn" onclick="switchMenu(this,'drinks')">Drinks</button>
+    </div>
+  </div>
+
+  <div class="menu-grid reveal" id="menuGrid">
+    {{#each menu.starters}}
+    <div class="menu-item" data-cat="starters">
+      <div>
+        <span class="item-tag">{{this.tag}}</span>
+        <div class="item-name">{{this.name}}</div>
+        <div class="item-desc">{{this.desc}}</div>
+        <div class="item-allergens">{{#each this.badges}}<span class="allergen">{{this}}</span>{{/each}}</div>
+      </div>
+      <div class="item-price">{{this.price}}</div>
+    </div>
+    {{/each}}
+    {{#each menu.mains}}
+    <div class="menu-item" data-cat="mains" style="display:none">
+      <div>
+        <span class="item-tag">{{this.tag}}</span>
+        <div class="item-name">{{this.name}}</div>
+        <div class="item-desc">{{this.desc}}</div>
+        <div class="item-allergens">{{#each this.badges}}<span class="allergen">{{this}}</span>{{/each}}</div>
+      </div>
+      <div class="item-price">{{this.price}}</div>
+    </div>
+    {{/each}}
+    {{#each menu.desserts}}
+    <div class="menu-item" data-cat="desserts" style="display:none">
+      <div>
+        <span class="item-tag">{{this.tag}}</span>
+        <div class="item-name">{{this.name}}</div>
+        <div class="item-desc">{{this.desc}}</div>
+        <div class="item-allergens">{{#each this.badges}}<span class="allergen">{{this}}</span>{{/each}}</div>
+      </div>
+      <div class="item-price">{{this.price}}</div>
+    </div>
+    {{/each}}
+    {{#each menu.drinks}}
+    <div class="menu-item" data-cat="drinks" style="display:none">
+      <div>
+        <span class="item-tag">{{this.tag}}</span>
+        <div class="item-name">{{this.name}}</div>
+        <div class="item-desc">{{this.desc}}</div>
+      </div>
+      <div class="item-price">{{this.price}}</div>
+    </div>
+    {{/each}}
+  </div>
+  <p class="menu-note">Menu changes with India's seasons. Please inform us of any dietary requirements when booking.<br>V = Vegetarian · VG = Vegan · GF = Gluten Free · DF = Dairy Free</p>
+  <div class="menu-view-full">
+    <a class="btn-outline-light" href="/menu">View Full Menu →</a>
+  </div>
+</section>
+
+<!-- ── EXPERIENCES ── -->
+<section id="experience">
+  {{#each experiences}}
+  <div class="exp-card">
+    <div class="exp-card-bg">{{this.emoji}}</div>
+    <div class="exp-overlay"></div>
+    <div class="exp-content">
+      <div class="exp-number">{{this.num}}</div>
+      <div class="exp-title">{{this.title}}</div>
+      <div class="exp-body">{{this.body}}</div>
+      <div class="exp-line"></div>
+    </div>
+  </div>
+  {{/each}}
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <div class="gallery-label">A Glimpse Inside Spice Mandal</div>
+  <div class="gallery-track">
+    <div class="gallery-cell g1">🍛<div class="gallery-cell-caption">Dal Makhani</div></div>
+    <div class="gallery-cell g2">🫓<div class="gallery-cell-caption">Tandoor Naan</div></div>
+    <div class="gallery-cell g3">🍢<div class="gallery-cell-caption">Galouti Kebab</div></div>
+    <div class="gallery-cell g4">🌹<div class="gallery-cell-caption">Décor</div></div>
+    <div class="gallery-cell g5">🍮<div class="gallery-cell-caption">Shahi Tukda</div></div>
+    <div class="gallery-cell g6">🪔<div class="gallery-cell-caption">Ambience</div></div>
+    <div class="gallery-cell g7">🦞<div class="gallery-cell-caption">Lobster Masala</div></div>
+    <div class="gallery-cell g8">🥗<div class="gallery-cell-caption">Seasonal Salad</div></div>
+    <div class="gallery-cell g9">🍹<div class="gallery-cell-caption">Thandai Martini</div></div>
+    <div class="gallery-cell g10">🐑<div class="gallery-cell-caption">Raan-e-Mandal</div></div>
+    <div class="gallery-cell g11">🥛<div class="gallery-cell-caption">Kulfi Falooda</div></div>
+    <div class="gallery-cell g12">🎉<div class="gallery-cell-caption">Private Dining</div></div>
+    <!-- Duplicate for loop -->
+    <div class="gallery-cell g1">🍛<div class="gallery-cell-caption">Dal Makhani</div></div>
+    <div class="gallery-cell g2">🫓<div class="gallery-cell-caption">Tandoor Naan</div></div>
+    <div class="gallery-cell g3">🍢<div class="gallery-cell-caption">Galouti Kebab</div></div>
+    <div class="gallery-cell g4">🌹<div class="gallery-cell-caption">Décor</div></div>
+    <div class="gallery-cell g5">🍮<div class="gallery-cell-caption">Shahi Tukda</div></div>
+    <div class="gallery-cell g6">🪔<div class="gallery-cell-caption">Ambience</div></div>
+    <div class="gallery-cell g7">🦞<div class="gallery-cell-caption">Lobster Masala</div></div>
+    <div class="gallery-cell g8">🥗<div class="gallery-cell-caption">Seasonal Salad</div></div>
+    <div class="gallery-cell g9">🍹<div class="gallery-cell-caption">Thandai Martini</div></div>
+    <div class="gallery-cell g10">🐑<div class="gallery-cell-caption">Raan-e-Mandal</div></div>
+    <div class="gallery-cell g11">🥛<div class="gallery-cell-caption">Kulfi Falooda</div></div>
+    <div class="gallery-cell g12">🎉<div class="gallery-cell-caption">Private Dining</div></div>
+  </div>
+</section>
+
+<!-- ── CHEFS ── -->
+<section id="chefs" style="background:var(--cream);padding:7rem 5%;">
+  <div class="chefs-intro reveal">
+    <span class="section-label">The Masters</span>
+    <h2 class="section-title">The karigars behind<br><em>every flame</em></h2>
+    <p class="section-body" style="margin-top:1rem;">Our kitchen is led by a team of award-winning culinary artists whose combined mastery spans India's greatest culinary traditions.</p>
+  </div>
+  <div class="chefs-grid reveal">
+    {{#each chefs}}
+    <div class="chef-card">
+      <div class="chef-portrait">
+        {{this.emoji}}
+        <div class="chef-badge">{{this.badge}}</div>
+        <div class="chef-award">{{this.award}}</div>
+      </div>
+      <div class="chef-name">{{this.name}}</div>
+      <div class="chef-role">{{this.role}}</div>
+      <p class="chef-bio">{{this.bio}}</p>
+    </div>
+    {{/each}}
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials" style="background:var(--parchment);padding:7rem 5%;">
+  <div class="testi-header reveal">
+    <div class="testi-stars-row">
+      <span class="stars">★★★★★</span>
+      <span class="rating-text">4.8 · 3,200+ Reviews</span>
+    </div>
+    <span class="section-label muted" style="display:block;text-align:center;">Guest Reviews</span>
+    <h2 class="section-title" style="text-align:center;">Words from our <em>guests</em></h2>
+  </div>
+  <div class="testi-grid reveal">
+    {{#each testimonials}}
+    <div class="testi-card">
+      <div class="testi-stars">{{this.stars}}</div>
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">{{this.text}}</p>
+      <div class="testi-footer">
+        <div class="testi-avatar">{{this.initials}}</div>
+        <div>
+          <div class="testi-name">{{this.name}}</div>
+          <div class="testi-source">{{this.source}}</div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</section>
+
+<!-- ── RESERVATIONS (Home Section) ── -->
+<section id="reservations" style="background:var(--cream);padding:7rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start;">
+  <div class="res-text reveal-left">
+    <span class="section-label">Reserve a Table</span>
+    <h2 class="section-title">Join us for an<br><em>unforgettable</em><br>Indian evening</h2>
+    <div class="ornament" style="margin-top:1.2rem;"><div class="ornament-gem"></div></div>
+    <p class="section-body">We recommend booking at least 3 days in advance for weekends. For wedding parties, corporate events, or groups of 10+, please call us directly.</p>
+    <div class="hours-grid" style="margin-top:2rem;">
+      <div class="hour-cell"><div class="hour-day">Mon – Thu</div><div class="hour-time">12:00 – 11:00 PM</div></div>
+      <div class="hour-cell"><div class="hour-day">Fri – Sat</div><div class="hour-time">12:00 – 11:30 PM</div></div>
+      <div class="hour-cell"><div class="hour-day">Sunday</div><div class="hour-time">12:00 – 10:30 PM</div></div>
+      <div class="hour-cell"><div class="hour-day">Lunch (Daily)</div><div class="hour-time">12:00 – 3:30 PM</div></div>
+    </div>
+    <div class="res-extras">
+      <div class="res-extra"><span class="icon">👔</span> Smart casual attire requested</div>
+      <div class="res-extra"><span class="icon">💒</span> Wedding & engagement parties welcome</div>
+      <div class="res-extra"><span class="icon">🏢</span> Corporate dining & team celebrations</div>
+      <div class="res-extra"><span class="icon">🎁</span> Gift vouchers available at reception</div>
+    </div>
+  </div>
+  <div class="res-form-card reveal-right">
+    <h3>Make a Reservation</h3>
+    <p>Secure your table in under 60 seconds</p>
+    <form id="reservationForm">
+      <div class="form-row-2">
+        <div class="form-grp"><label class="form-lbl">First Name *</label><input type="text" name="firstName" class="form-inp" placeholder="Arjun" required></div>
+        <div class="form-grp"><label class="form-lbl">Last Name</label><input type="text" name="lastName" class="form-inp" placeholder="Sharma"></div>
+      </div>
+      <div class="form-grp"><label class="form-lbl">Email Address *</label><input type="email" name="email" class="form-inp" placeholder="arjun@example.com" required></div>
+      <div class="form-grp"><label class="form-lbl">Mobile Number *</label><input type="tel" name="phone" class="form-inp" placeholder="+91 98765 43210" required></div>
+      <div class="form-row-2">
+        <div class="form-grp"><label class="form-lbl">Date *</label><input type="date" name="date" class="form-inp" required></div>
+        <div class="form-grp">
+          <label class="form-lbl">Preferred Time</label>
+          <select name="time" class="form-sel">
+            <option>12:00 PM</option><option>12:30 PM</option><option>1:00 PM</option>
+            <option>7:00 PM</option><option>7:30 PM</option><option selected>8:00 PM</option>
+            <option>8:30 PM</option><option>9:00 PM</option><option>9:30 PM</option><option>10:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-grp">
+          <label class="form-lbl">Guests *</label>
+          <select name="guests" class="form-sel" required>
+            <option>1 Guest</option><option>2 Guests</option><option selected>3–4 Guests</option>
+            <option>5–6 Guests</option><option>7–10 Guests</option><option>Large Party (10+)</option>
+          </select>
+        </div>
+        <div class="form-grp">
+          <label class="form-lbl">Occasion</label>
+          <select name="occasion" class="form-sel">
+            <option value="">Select (optional)</option>
+            <option>Anniversary</option><option>Birthday</option><option>Wedding Party</option>
+            <option>Engagement</option><option>Corporate Dinner</option><option>Other Celebration</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grp"><label class="form-lbl">Special Requests</label><textarea name="requests" class="form-txt" placeholder="Dietary needs, high chair, vegetarian preference, wine pairing…"></textarea></div>
+      <button type="submit" class="form-btn" id="resBtn">Reserve My Table →</button>
+      <p class="form-note">🔒 Your details are secure and never shared. Confirmation via SMS & email within 15 minutes.</p>
+    </form>
+    <div id="resSuccess" style="display:none;text-align:center;padding:2rem 0;">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🎉</div>
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--cream);margin-bottom:0.5rem;">Table Reserved!</h4>
+      <p id="resMessage" style="color:rgba(247,242,234,0.5);font-size:0.85rem;font-weight:300;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<div id="newsletter">
+  <div class="nl-text reveal">
+    <h3>Stay at our table.<br>Never miss a season.</h3>
+    <p>New seasonal menus, chef's table events, wine & spirits evenings — straight to your inbox.</p>
+  </div>
+  <div class="nl-form reveal">
+    <input class="nl-input" type="email" placeholder="Your email address" id="nlEmail">
+    <button class="nl-btn" onclick="subscribeNL(this)">Subscribe</button>
+  </div>
+</div>
+
+<!-- ── LOCATION ── -->
+<section id="location" style="background:var(--charcoal2);padding:7rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;">
+  <div class="reveal-left">
+    <span class="section-label gold">Find Us</span>
+    <h2 class="section-title light">In the heart of <em>New Delhi</em></h2>
+    <p class="section-body light" style="margin-top:1rem;max-width:420px;">Located in the iconic Connaught Place, Spice Mandal is easily accessible by Metro, auto-rickshaw, or cab from anywhere in Delhi-NCR.</p>
+    <div class="loc-details">
+      <div class="loc-row">
+        <div class="loc-icon-box">📍</div>
+        <div><div class="loc-k">Address</div><div class="loc-v">12, Connaught Place, Inner Circle, Block F, New Delhi – 110001</div></div>
+      </div>
+      <div class="loc-row">
+        <div class="loc-icon-box">🚇</div>
+        <div><div class="loc-k">Nearest Metro</div><div class="loc-v">Rajiv Chowk Metro Station (Blue & Yellow Line) — 2 min walk</div></div>
+      </div>
+      <div class="loc-row">
+        <div class="loc-icon-box">🚗</div>
+        <div><div class="loc-k">Parking</div><div class="loc-v">Valet parking available · Connaught Place Basement Parking</div></div>
+      </div>
+      <div class="loc-row">
+        <div class="loc-icon-box">📞</div>
+        <div><div class="loc-k">Phone & Email</div><div class="loc-v">+91 98765 43210 · reservations@spicemandal.in</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="location-map reveal-right">
+    <div class="map-grid"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 400 400" fill="none">
+      <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(247,242,234,0.07)" stroke-width="14"/>
+      <line x1="200" y1="0" x2="200" y2="400" stroke="rgba(247,242,234,0.07)" stroke-width="14"/>
+      <line x1="0" y1="140" x2="400" y2="140" stroke="rgba(247,242,234,0.04)" stroke-width="7"/>
+      <line x1="0" y1="260" x2="400" y2="260" stroke="rgba(247,242,234,0.04)" stroke-width="7"/>
+      <line x1="120" y1="0" x2="120" y2="400" stroke="rgba(247,242,234,0.03)" stroke-width="5"/>
+      <line x1="280" y1="0" x2="280" y2="400" stroke="rgba(247,242,234,0.03)" stroke-width="5"/>
+      <circle cx="200" cy="200" r="70" stroke="rgba(200,98,42,0.15)" stroke-width="1" fill="none"/>
+      <circle cx="200" cy="200" r="120" stroke="rgba(200,98,42,0.07)" stroke-width="1" fill="none"/>
+      <text x="18" y="195" fill="rgba(247,242,234,0.2)" font-size="9" font-family="DM Sans">CONNAUGHT PLACE INNER CIRCLE</text>
+      <text x="18" y="135" fill="rgba(247,242,234,0.1)" font-size="8" font-family="DM Sans">JANPATH</text>
+      <text x="18" y="255" fill="rgba(247,242,234,0.1)" font-size="8" font-family="DM Sans">SANSAD MARG</text>
+    </svg>
+    <div class="map-pin-wrap">
+      <div class="map-pin-icon">📍</div>
+      <div class="map-label"><p>Spice Mandal</p><small>12, Connaught Place · New Delhi 110001</small></div>
+    </div>
+    <div class="map-subway">
+      <p>Nearest Metro</p>
+      <div class="lines">
+        <div class="subway-line" style="background:#0033A0;">Blue</div>
+        <div class="subway-line" style="background:#F6B517;color:#1a1710;">Yellow</div>
+      </div>
+      <small style="color:rgba(247,242,234,0.3);font-size:0.6rem;margin-top:0.3rem;display:block;">Rajiv Chowk · 2 min walk</small>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<div style="padding:10rem 5% 7rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start;background:var(--ivory);">
+  <div class="reveal-left">
+    <span class="section-label">Book Your Table</span>
+    <h1 class="section-title">Reserve an<br><em>unforgettable</em><br>Indian evening</h1>
+    <div class="ornament"><div class="ornament-gem"></div></div>
+    <p class="section-body" style="margin-top:1rem;">We recommend booking 3+ days in advance for weekends. For groups of 10+ or special events, please call us directly on <a href="tel:+919876543210" style="color:var(--saffron);text-decoration:none;">+91 98765 43210</a>.</p>
+    <div class="hours-grid" style="margin-top:2rem;">
+      <div class="hour-cell"><div class="hour-day">Mon – Thu</div><div class="hour-time">12 PM – 11 PM</div></div>
+      <div class="hour-cell"><div class="hour-day">Fri – Sat</div><div class="hour-time">12 PM – 11:30 PM</div></div>
+      <div class="hour-cell"><div class="hour-day">Sunday</div><div class="hour-time">12 PM – 10:30 PM</div></div>
+      <div class="hour-cell"><div class="hour-day">Lunch (Daily)</div><div class="hour-time">12 PM – 3:30 PM</div></div>
+    </div>
+    <div class="res-extras">
+      <div class="res-extra"><span class="icon">💒</span> Wedding & engagement parties welcome</div>
+      <div class="res-extra"><span class="icon">🏢</span> Corporate dining & team outings</div>
+      <div class="res-extra"><span class="icon">🎂</span> Birthday & anniversary celebrations</div>
+      <div class="res-extra"><span class="icon">🌿</span> Full vegetarian menu available on request</div>
+    </div>
+  </div>
+  <div class="res-form-card reveal-right">
+    <h3>Make a Reservation</h3>
+    <p>Confirmation via SMS & email in 15 minutes</p>
+    <form id="reservationForm">
+      <div class="form-row-2">
+        <div class="form-grp"><label class="form-lbl">First Name *</label><input type="text" name="firstName" class="form-inp" placeholder="Arjun" required></div>
+        <div class="form-grp"><label class="form-lbl">Last Name</label><input type="text" name="lastName" class="form-inp" placeholder="Sharma"></div>
+      </div>
+      <div class="form-grp"><label class="form-lbl">Email *</label><input type="email" name="email" class="form-inp" placeholder="arjun@example.com" required></div>
+      <div class="form-grp"><label class="form-lbl">Mobile *</label><input type="tel" name="phone" class="form-inp" placeholder="+91 98765 43210" required></div>
+      <div class="form-row-2">
+        <div class="form-grp"><label class="form-lbl">Date *</label><input type="date" name="date" class="form-inp" required></div>
+        <div class="form-grp"><label class="form-lbl">Time</label><select name="time" class="form-sel"><option>12:00 PM</option><option>1:00 PM</option><option>7:00 PM</option><option>7:30 PM</option><option selected>8:00 PM</option><option>8:30 PM</option><option>9:00 PM</option><option>9:30 PM</option><option>10:00 PM</option></select></div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-grp"><label class="form-lbl">Guests *</label><select name="guests" class="form-sel" required><option>1</option><option>2</option><option selected>3–4</option><option>5–6</option><option>7–10</option><option>10+</option></select></div>
+        <div class="form-grp"><label class="form-lbl">Occasion</label><select name="occasion" class="form-sel"><option value="">Optional</option><option>Anniversary</option><option>Birthday</option><option>Wedding Party</option><option>Corporate</option><option>Engagement</option></select></div>
+      </div>
+      <div class="form-grp"><label class="form-lbl">Special Requests</label><textarea name="requests" class="form-txt" placeholder="Dietary needs, vegetarian preference, high chair, décor…"></textarea></div>
+      <button type="submit" class="form-btn" id="resBtn">Reserve My Table →</button>
+      <p class="form-note">🔒 Your details are never shared. Free cancellation up to 24 hours before your booking.</p>
+    </form>
+    <div id="resSuccess" style="display:none;text-align:center;padding:2rem 0;">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🎉</div>
+      <h4 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--ivory);margin-bottom:0.5rem;">Table Reserved!</h4>
+      <p id="resMessage" style="color:rgba(250,245,236,0.5);font-size:0.85rem;font-weight:300;"></p>
+    </div>
+  </div>
+</div>

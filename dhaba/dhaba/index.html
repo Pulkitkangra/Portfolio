@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sardar Ji Da Dhaba — Authentic Punjabi Food in Ambala</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0800;
+  --surface: #111008;
+  --card: #1a1608;
+  --border: rgba(212,175,55,0.15);
+  --gold: #d4af37;
+  --gold-light: #f0d060;
+  --gold-dark: #a07820;
+  --fg: #f5f0e0;
+  --muted: #8a8070;
+  --red: #c0392b;
+  --cream: #fdf6e3;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--fg);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+
+/* Cursor */
+.cur{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;}
+.cur-ring{width:32px;height:32px;border:1.5px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:0.4;}
+
+/* Pattern overlay */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle, rgba(212,175,55,0.03) 1px, transparent 1px);
+  background-size:30px 30px;pointer-events:none;z-index:0;
+}
+
+/* Nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.2rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(10,8,0,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-weight:800;font-size:1.4rem;
+  color:var(--gold);letter-spacing:0.02em;
+  display:flex;flex-direction:column;line-height:1;
+}
+.nav-logo span{font-size:0.65rem;font-family:'DM Sans',sans-serif;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;font-weight:400;margin-top:2px;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted);font-size:0.85rem;font-weight:500;text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-right{display:flex;gap:1rem;align-items:center;}
+.btn-reserve{
+  background:var(--gold);color:#000;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.85rem;
+  padding:10px 22px;border-radius:6px;text-decoration:none;
+  letter-spacing:0.04em;transition:all 0.2s;
+}
+.btn-reserve:hover{background:var(--gold-light);transform:translateY(-1px);}
+
+/* Hero */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;
+  padding:8rem 3rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-lines{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.hero-ornament{
+  font-size:2.5rem;margin-bottom:1rem;
+  animation:fadeUp 0.7s ease both;
+  display:block;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border);border-radius:100px;
+  padding:6px 18px;font-size:0.75rem;font-weight:500;
+  color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:2rem;
+  animation:fadeUp 0.7s 0.1s ease both;
+  background:rgba(212,175,55,0.05);
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  font-size:clamp(2.8rem,8vw,7rem);
+  line-height:1;letter-spacing:-0.02em;
+  margin-bottom:0.5rem;
+  color:var(--gold);
+  animation:fadeUp 0.7s 0.15s ease both;
+}
+.hero-title-hindi{
+  font-family:'Playfair Display',serif;
+  font-weight:400;font-size:clamp(1.2rem,3vw,2rem);
+  color:var(--muted);letter-spacing:0.08em;
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.7s 0.2s ease both;
+  display:block;
+}
+.hero-divider{
+  display:flex;align-items:center;gap:1rem;
+  margin:1.5rem auto;width:fit-content;
+  animation:fadeUp 0.7s 0.25s ease both;
+}
+.hero-divider-line{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.hero-divider-line.r{background:linear-gradient(90deg,var(--gold),transparent);}
+.hero-divider-icon{color:var(--gold);font-size:1.2rem;}
+.hero-sub{
+  font-size:1.05rem;color:var(--muted);line-height:1.8;
+  max-width:540px;margin:0 auto 2.5rem;
+  animation:fadeUp 0.7s 0.3s ease both;
+}
+.hero-sub strong{color:var(--fg);}
+.hero-ctas{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.7s 0.35s ease both;
+}
+.btn-gold{
+  background:var(--gold);color:#000;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;
+  padding:14px 32px;border-radius:6px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s;letter-spacing:0.04em;
+}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,175,55,0.25);}
+.btn-ghost{
+  border:1.5px solid var(--border);color:var(--gold);
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;
+  padding:14px 32px;border-radius:6px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s;letter-spacing:0.04em;
+}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(212,175,55,0.05);}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:fadeUp 0.7s 0.5s ease both;
+}
+.scroll-arrow{animation:bounce 2s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* Stats */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:var(--surface);position:relative;z-index:1;
+}
+.stat{
+  padding:2rem 1.5rem;text-align:center;
+  border-right:1px solid var(--border);
+}
+.stat:last-child{border-right:none;}
+.stat-num{
+  font-family:'Playfair Display',serif;font-weight:800;
+  font-size:2.2rem;color:var(--gold);line-height:1;margin-bottom:4px;
+}
+.stat-label{font-size:0.75rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+
+/* Section */
+section{padding:6rem 3rem;position:relative;z-index:1;}
+.sec-ornament{text-align:center;font-size:1.5rem;margin-bottom:0.5rem;display:block;}
+.sec-label{
+  text-align:center;font-size:0.72rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;
+}
+.sec-title{
+  font-family:'Playfair Display',serif;font-weight:800;
+  font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.02em;
+  text-align:center;margin-bottom:0.5rem;
+}
+.sec-title-hindi{
+  text-align:center;font-size:1rem;color:var(--muted);
+  font-style:italic;margin-bottom:3rem;
+}
+.gold-divider{
+  display:flex;align-items:center;gap:1rem;
+  margin:0 auto 3rem;width:fit-content;
+}
+.gdl{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.gdl.r{background:linear-gradient(90deg,var(--gold),transparent);}
+.gdi{color:var(--gold);font-size:1rem;}
+
+/* Menu */
+#menu{background:var(--surface);}
+.menu-tabs{
+  display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;
+}
+.menu-tab{
+  padding:9px 24px;border-radius:6px;font-size:0.85rem;font-weight:600;
+  cursor:pointer;border:1.5px solid var(--border);
+  background:transparent;color:var(--muted);
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+  letter-spacing:0.06em;text-transform:uppercase;
+}
+.menu-tab.active,.menu-tab:hover{background:var(--gold);color:#000;border-color:var(--gold);}
+.menu-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;
+}
+.menu-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;
+  transition:border-color 0.25s,transform 0.25s;
+}
+.menu-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+.menu-icon{font-size:2.5rem;flex-shrink:0;}
+.menu-info h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:2px;color:var(--fg);}
+.menu-info .hindi{font-size:0.78rem;color:var(--gold);margin-bottom:6px;font-style:italic;}
+.menu-info p{font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:0.75rem;}
+.menu-footer{display:flex;justify-content:space-between;align-items:center;}
+.menu-price{font-family:'Playfair Display',serif;font-weight:700;color:var(--gold);font-size:1.05rem;}
+.menu-veg{width:14px;height:14px;border:2px solid #22c55e;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.menu-veg::after{content:'';width:6px;height:6px;background:#22c55e;border-radius:50%;}
+.menu-nonveg{width:14px;height:14px;border:2px solid var(--red);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.menu-nonveg::after{content:'';width:6px;height:6px;background:var(--red);border-radius:50%;}
+
+/* Specialities */
+.spec-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;
+}
+.spec-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:2rem;text-align:center;
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.spec-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.spec-card:hover{transform:translateY(-5px);border-color:rgba(212,175,55,0.3);}
+.spec-card:hover::before{opacity:1;}
+.spec-icon{font-size:2.5rem;display:block;margin-bottom:1rem;}
+.spec-card h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:4px;color:var(--gold);}
+.spec-card .hindi{font-size:0.75rem;color:var(--muted);font-style:italic;margin-bottom:0.75rem;}
+.spec-card p{font-size:0.82rem;color:var(--muted);line-height:1.6;}
+
+/* Gallery */
+#gallery{background:var(--surface);}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto;
+  gap:1rem;
+}
+.gal-item{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:4rem;overflow:hidden;position:relative;
+  transition:transform 0.25s,border-color 0.25s;
+}
+.gal-item:hover{transform:scale(1.02);border-color:var(--gold);}
+.gal-item.big{grid-column:span 2;height:240px;}
+.gal-item.tall{grid-row:span 2;height:100%;}
+.gal-item.normal{height:180px;}
+.gal-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);
+  display:flex;align-items:flex-end;padding:1rem;
+  opacity:0;transition:opacity 0.3s;
+}
+.gal-item:hover .gal-overlay{opacity:1;}
+.gal-label{font-size:0.8rem;font-weight:600;color:var(--gold);letter-spacing:0.06em;}
+
+/* Testimonials */
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.test-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:2rem;position:relative;
+}
+.test-quote{
+  font-size:3rem;font-family:'Playfair Display',serif;
+  color:var(--gold);opacity:0.3;line-height:0.8;
+  margin-bottom:1rem;display:block;
+}
+.test-card p{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;font-style:italic;}
+.test-author{display:flex;align-items:center;gap:10px;}
+.test-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.test-name{font-weight:600;font-size:0.88rem;}
+.test-loc{font-size:0.72rem;color:var(--muted);}
+.stars{color:var(--gold);font-size:0.8rem;margin-bottom:0.75rem;}
+
+/* Contact */
+#contact{background:var(--bg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.contact-left h2{
+  font-family:'Playfair Display',serif;font-weight:800;
+  font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;
+  margin-bottom:0.5rem;color:var(--gold);
+}
+.contact-left .hindi{font-style:italic;color:var(--muted);font-size:0.9rem;margin-bottom:1.5rem;display:block;}
+.contact-left p{color:var(--muted);line-height:1.7;margin-bottom:2rem;}
+.cinfo{display:flex;flex-direction:column;gap:1rem;}
+.cinfo-row{
+  display:flex;align-items:center;gap:14px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:1rem 1.2rem;
+  transition:border-color 0.2s;
+}
+.cinfo-row:hover{border-color:var(--gold);}
+.cinfo-icon{font-size:1.2rem;flex-shrink:0;}
+.cinfo-val{font-weight:600;font-size:0.9rem;}
+.cinfo-desc{font-size:0.75rem;color:var(--muted);}
+.reserve-form{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;
+  position:relative;overflow:hidden;
+}
+.reserve-form::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-light));
+}
+.reserve-form h3{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;
+  color:var(--gold);margin-bottom:0.25rem;
+}
+.reserve-form .hindi{font-size:0.8rem;color:var(--muted);font-style:italic;margin-bottom:1.5rem;display:block;}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
+.field label{font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+.field input,.field textarea,.field select{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;padding:12px 16px;
+  color:var(--fg);font-family:'DM Sans',sans-serif;font-size:0.9rem;
+  outline:none;transition:border-color 0.2s,box-shadow 0.2s;width:100%;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,0.1);
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(245,240,224,0.2);}
+.field select option{background:var(--card);}
+.field textarea{resize:vertical;min-height:90px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.btn-book{
+  width:100%;background:var(--gold);color:#000;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;
+  padding:14px;border-radius:8px;border:none;cursor:pointer;
+  letter-spacing:0.04em;transition:all 0.2s;
+}
+.btn-book:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 24px rgba(212,175,55,0.25);}
+
+/* Footer */
+footer{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:3rem 3rem 1.5rem;position:relative;z-index:1;
+}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;
+  padding-bottom:2rem;border-bottom:1px solid var(--border);
+}
+.footer-logo{
+  font-family:'Playfair Display',serif;font-weight:800;
+  font-size:1.5rem;color:var(--gold);margin-bottom:0.25rem;
+}
+.footer-logo-hindi{font-size:0.75rem;color:var(--muted);font-style:italic;margin-bottom:0.75rem;display:block;}
+.footer-desc{color:var(--muted);font-size:0.82rem;line-height:1.6;max-width:280px;}
+.footer-col h4{font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;color:var(--gold);margin-bottom:1rem;}
+.footer-col a{display:block;color:var(--muted);font-size:0.82rem;text-decoration:none;margin-bottom:0.6rem;transition:color 0.2s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.5rem;font-size:0.78rem;color:var(--muted);flex-wrap:wrap;gap:1rem;
+}
+.footer-bottom a{color:var(--gold);text-decoration:none;}
+
+/* Reveal */
+.rev{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.rev.in{opacity:1;transform:translateY(0);}
+.rev-d1{transition-delay:0.1s;}
+.rev-d2{transition-delay:0.2s;}
+.rev-d3{transition-delay:0.3s;}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;
+  background:var(--gold);color:#000;
+  padding:12px 22px;border-radius:8px;
+  font-size:0.88rem;font-weight:700;
+  transform:translateY(80px);opacity:0;
+  transition:all 0.4s;z-index:999;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.2rem;}
+  .nav-links{display:none;}
+  section{padding:4rem 1.2rem;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .stat{border-bottom:1px solid var(--border);}
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+  .gal-item.big{grid-column:span 2;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sardar Ji Da Dhaba<span>ਸਰਦਾਰ ਜੀ ਦਾ ਢਾਬਾ · Ambala</span></div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specialities">Specialities</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Reserve</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#contact" class="btn-reserve">Reserve Table</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <span class="hero-ornament">🍛</span>
+  <div class="hero-badge">⭐ Ambala's Most Loved Dhaba Since 1995</div>
+  <h1 class="hero-title">Sardar Ji<br>Da Dhaba</h1>
+  <span class="hero-title-hindi">ਸਰਦਾਰ ਜੀ ਦਾ ਢਾਬਾ — ਅਸਲੀ ਪੰਜਾਬੀ ਸੁਆਦ</span>
+  <div class="hero-divider">
+    <div class="hero-divider-line"></div>
+    <span class="hero-divider-icon">✦</span>
+    <div class="hero-divider-line r"></div>
+  </div>
+  <p class="hero-sub">
+    Experience the <strong>authentic taste of Punjab</strong> — slow-cooked dals, tandoori rotis, and rich curries made from recipes passed down through generations. <strong>Asli desi swad!</strong>
+  </p>
+  <div class="hero-ctas">
+    <a href="#menu" class="btn-gold">View Menu 🍽️</a>
+    <a href="https://wa.me/919813076190?text=Hi! I want to reserve a table at Sardar Ji Da Dhaba" target="_blank" class="btn-ghost">💬 Reserve on WhatsApp</a>
+  </div>
+  <div class="hero-scroll"><span>Scroll down</span><span class="scroll-arrow">↓</span></div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">28+</div><div class="stat-label">Years of Legacy</div></div>
+  <div class="stat"><div class="stat-num">50k+</div><div class="stat-label">Happy Guests</div></div>
+  <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Dishes on Menu</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Pure & Fresh</div></div>
+</div>
+
+<!-- MENU -->
+<section id="menu">
+  <span class="sec-ornament">🍽️</span>
+  <div class="sec-label">Our Menu — ਸਾਡਾ ਮੀਨੂ</div>
+  <h2 class="sec-title rev">Taste the Real Punjab</h2>
+  <div class="sec-title-hindi rev">ਅਸਲੀ ਪੰਜਾਬੀ ਖਾਣਾ</div>
+  <div class="gold-divider rev"><div class="gdl"></div><span class="gdi">✦</span><div class="gdl r"></div></div>
+  <div class="menu-tabs rev">
+    <button class="menu-tab active" onclick="filterMenu(this,'all')">All</button>
+    <button class="menu-tab" onclick="filterMenu(this,'main')">Main Course</button>
+    <button class="menu-tab" onclick="filterMenu(this,'bread')">Breads</button>
+    <button class="menu-tab" onclick="filterMenu(this,'starter')">Starters</button>
+    <button class="menu-tab" onclick="filterMenu(this,'dessert')">Desserts</button>
+  </div>
+  <div class="menu-grid" id="menuGrid">
+    <div class="menu-card rev rev-d1" data-cat="main">
+      <div class="menu-icon">🍛</div>
+      <div class="menu-info">
+        <h3>Dal Makhani</h3>
+        <div class="hindi">ਦਾਲ ਮੱਖਣੀ</div>
+        <p>Slow cooked black lentils in rich tomato butter gravy. Our signature dish!</p>
+        <div class="menu-footer"><div class="menu-price">₹180</div><div class="menu-veg"></div></div>
+      </div>
+    </div>
+    <div class="menu-card rev rev-d2" data-cat="main">
+      <div class="menu-icon">🍗</div>
+      <div class="menu-info">
+        <h3>Butter Chicken</h3>
+        <div class="hindi">ਮੱਖਣ ਚਿਕਨ</div>
+        <p>Tender chicken in creamy tomato gravy. Pairs best with naan!</p>
+        <div class="menu-footer"><div class="menu-price">₹280</div><div class="menu-nonveg"></div></div>
+      </div>
+    </div>
+    <div class="menu-card rev rev-d3" data-cat="main">
+      <div class="menu-icon">🥘</div>
+      <div class="menu-info">
+        <h3>Sarson Da Saag</h3>
+        <div class="hindi">ਸਰ੍ਹੋਂ ਦਾ ਸਾਗ</div>
+        <p>Winter special mustard greens cooked with spices. Served with makki di roti.</p>
+        <div class="menu-footer"><div class="menu-price">₹160</div><div class="menu-veg"></div></div>
+      </div>
+    </div>
+    <div class="menu-card rev rev-d1" data-cat="bread">
+      <div class="menu-icon">🫓</div>
+      <div class="menu-info">
+        <h3>Tandoori Roti</h3>
+        <div class="hindi">ਤੰਦੂਰੀ ਰੋਟੀ</div>
+        <p>Fresh wheat bread baked in clay tandoor. Crispy outside, soft inside.</p>
+        <div class="menu-footer"><div class="menu-price">₹30</div><div class="menu-veg"></div></div>
+      </div>
+    </div>
+    <div class="menu-card rev rev-d2" data-cat="bread">
+      <div class="menu-icon">🧅</div>
+      <div class="menu-info">
+        <h3>Stuffed Paratha</h3>
+        <div class="hindi">ਭਰਵਾਂ ਪਰਾਂਠਾ</div>
+        <p>Aloo, gobhi or mooli stuffed paratha with homemade white butter & lassi.</p>
+        <div class="menu-footer"><div class="menu-price">₹80</div><div class="menu-veg"></div></div>
+      </div>
+    </div>
+    <div class="menu-card rev rev-d3" data-cat="starter">
+      <div class="menu-icon">🍢</div>
+      <div class="menu-info">
+        <h3>Tandoori Chicken</h3>
+        <div class="hindi">ਤੰਦੂਰੀ ਚਿਕਨ</div>
+        <p>Marinated chicken roasted in tandoor with Punjabi spices. Smoky & juicy!</p>
+        <div class="menu-footer"><div class="menu-price">₹320</div><div class="menu-nonveg"></div></div>
+      </div>
+    </div>
+    <div class="menu-card rev rev-d1" data-cat="dessert">
+      <div class="menu-icon">🍮</div>
+      <div class="menu-info">
+        <h3>Gajar Ka Halwa</h3>
+        <div class="hindi">ਗਾਜਰ ਦਾ ਹਲਵਾ</div>
+        <p>Slow cooked carrot dessert with khoya, dry fruits and pure ghee.</p>
+        <div class="menu-footer"><div class="menu-price">₹120</div><div class="menu-veg"></div></div>
+      </div>
+    </div>
+    <div class="menu-card rev rev-d2" data-cat="starter">
+      <div class="menu-icon">🧆</div>
+      <div class="menu-info">
+        <h3>Amritsari Fish</h3>
+        <div class="hindi">ਅੰਮ੍ਰਿਤਸਰੀ ਮੱਛੀ</div>
+        <p>Crispy battered fish with Amritsari masala. A true Punjabi delight!</p>
+        <div class="menu-footer"><div class="menu-price">₹340</div><div class="menu-nonveg"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALITIES -->
+<section id="specialities" style="background:var(--surface)">
+  <span class="sec-ornament">⭐</span>
+  <div class="sec-label">Chef's Specials</div>
+  <h2 class="sec-title rev">Our Specialities</h2>
+  <div class="sec-title-hindi rev">ਸਾਡੀਆਂ ਖਾਸ ਡਿਸ਼ਾਂ</div>
+  <div class="gold-divider rev"><div class="gdl"></div><span class="gdi">✦</span><div class="gdl r"></div></div>
+  <div class="spec-grid">
+    <div class="spec-card rev rev-d1">
+      <span class="spec-icon">🔥</span>
+      <h3>Tandoor Cooked</h3>
+      <div class="hindi">ਤੰਦੂਰ ਵਿੱਚ ਪਕਾਇਆ</div>
+      <p>Every bread and kebab is cooked in our traditional clay tandoor for authentic smoky flavour.</p>
+    </div>
+    <div class="spec-card rev rev-d2">
+      <span class="spec-icon">🥛</span>
+      <h3>Fresh Lassi</h3>
+      <div class="hindi">ਤਾਜ਼ੀ ਲੱਸੀ</div>
+      <p>Thick, creamy Punjabi lassi made fresh daily. Sweet, salted or masala — your choice!</p>
+    </div>
+    <div class="spec-card rev rev-d3">
+      <span class="spec-icon">🧈</span>
+      <h3>Desi Ghee</h3>
+      <div class="hindi">ਦੇਸੀ ਘਿਓ</div>
+      <p>All our dishes are cooked in pure desi ghee for that authentic home-cooked taste.</p>
+    </div>
+    <div class="spec-card rev">
+      <span class="spec-icon">🌿</span>
+      <h3>Fresh Ingredients</h3>
+      <div class="hindi">ਤਾਜ਼ੀਆਂ ਸਮੱਗਰੀਆਂ</div>
+      <p>We source vegetables and spices fresh every morning from local markets. No frozen food!</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <span class="sec-ornament">📸</span>
+  <div class="sec-label">Our Dhaba</div>
+  <h2 class="sec-title rev">A Peek Inside</h2>
+  <div class="sec-title-hindi rev">ਸਾਡੇ ਢਾਬੇ ਦੀ ਝਲਕ</div>
+  <div class="gold-divider rev"><div class="gdl"></div><span class="gdi">✦</span><div class="gdl r"></div></div>
+  <div class="gallery-grid rev">
+    <div class="gal-item big" style="background:linear-gradient(135deg,#1a0a00,#3d1a00)">
+      🍛
+      <div class="gal-overlay"><span class="gal-label">Our Signature Dal Makhani</span></div>
+    </div>
+    <div class="gal-item tall" style="background:linear-gradient(135deg,#0a0a00,#2a2a00)">
+      🔥
+      <div class="gal-overlay"><span class="gal-label">The Tandoor</span></div>
+    </div>
+    <div class="gal-item normal" style="background:linear-gradient(135deg,#001a0a,#003d1a)">
+      🥘
+      <div class="gal-overlay"><span class="gal-label">Fresh Curries</span></div>
+    </div>
+    <div class="gal-item normal" style="background:linear-gradient(135deg,#1a001a,#3d003d)">
+      🍗
+      <div class="gal-overlay"><span class="gal-label">Tandoori Chicken</span></div>
+    </div>
+    <div class="gal-item normal" style="background:linear-gradient(135deg,#0a0800,#2a2000)">
+      🥛
+      <div class="gal-overlay"><span class="gal-label">Chilled Lassi</span></div>
+    </div>
+    <div class="gal-item normal" style="background:linear-gradient(135deg,#1a0800,#3d1800)">
+      🫓
+      <div class="gal-overlay"><span class="gal-label">Fresh Rotis</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--surface)">
+  <span class="sec-ornament">💬</span>
+  <div class="sec-label">What Guests Say</div>
+  <h2 class="sec-title rev">Reviews</h2>
+  <div class="sec-title-hindi rev">ਸਾਡੇ ਮਹਿਮਾਨਾਂ ਦੀ ਰਾਏ</div>
+  <div class="gold-divider rev"><div class="gdl"></div><span class="gdi">✦</span><div class="gdl r"></div></div>
+  <div class="test-grid">
+    <div class="test-card rev rev-d1">
+      <span class="test-quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>Dal Makhani here is the best I've had in Ambala. It tastes just like my nani's cooking. The butter naan is absolutely perfect. Will keep coming back!</p>
+      <div class="test-author">
+        <div class="test-avatar">😊</div>
+        <div><div class="test-name">Harpreet Singh</div><div class="test-loc">Ambala City</div></div>
+      </div>
+    </div>
+    <div class="test-card rev rev-d2">
+      <span class="test-quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>Asli Punjabi swad! The sarson da saag with makki di roti in winter is something else. The lassi is super thick and fresh. Highly recommended!</p>
+      <div class="test-author">
+        <div class="test-avatar">🙂</div>
+        <div><div class="test-name">Manpreet Kaur</div><div class="test-loc">Ambala Cantt</div></div>
+      </div>
+    </div>
+    <div class="test-card rev rev-d3">
+      <span class="test-quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>We had our family reunion here. The staff was very welcoming and the food was fresh and delicious. The tandoori chicken was smoky and amazing!</p>
+      <div class="test-author">
+        <div class="test-avatar">😄</div>
+        <div><div class="test-name">Gurpreet Sharma</div><div class="test-loc">Panchkula</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="sec-ornament">📍</span>
+  <div class="sec-label">Find Us</div>
+  <div class="contact-grid">
+    <div class="contact-left rev">
+      <h2>Visit Us in Ambala</h2>
+      <span class="hindi">ਅੰਮ੍ਰਿਤਸਰੀ ਸੁਆਦ, ਅੰਬਾਲੇ ਵਿੱਚ</span>
+      <p>Come enjoy an authentic Punjabi meal with your family. We welcome you with warm hospitality and even warmer food!</p>
+      <div class="cinfo">
+        <div class="cinfo-row">
+          <div class="cinfo-icon">📍</div>
+          <div><div class="cinfo-val">Near Bus Stand, GT Road, Ambala City</div><div class="cinfo-desc">Haryana, India — 134003</div></div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">📞</div>
+          <div><div class="cinfo-val">+91 98130 76190</div><div class="cinfo-desc">Open daily 7am – 11pm</div></div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">🕐</div>
+          <div><div class="cinfo-val">Every Day: 7:00 AM – 11:00 PM</div><div class="cinfo-desc">Breakfast, Lunch & Dinner</div></div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">💬</div>
+          <div><div class="cinfo-val">WhatsApp for table reservations</div><div class="cinfo-desc">Quick response guaranteed</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reserve-form rev rev-d2">
+      <h3>Reserve Your Table</h3>
+      <span class="hindi">ਮੇਜ਼ ਬੁੱਕ ਕਰੋ</span>
+      <div class="form-row">
+        <div class="field"><label>Your Name</label><input type="text" placeholder="e.g. Harpreet Singh" id="fname"/></div>
+        <div class="field"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 XXXXX XXXXX" id="fphone"/></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Date</label><input type="date" id="fdate"/></div>
+        <div class="field"><label>Time</label><input type="time" id="ftime"/></div>
+      </div>
+      <div class="field">
+        <label>Number of Guests</label>
+        <select id="fguests">
+          <option>1-2 People</option>
+          <option>3-5 People</option>
+          <option>6-10 People</option>
+          <option>Large Group (10+)</option>
+        </select>
+      </div>
+      <div class="field"><label>Special Request (Optional)</label><textarea placeholder="Any dietary requirements or special occasion?" id="fmsg"></textarea></div>
+      <button class="btn-book" onclick="reserve()">Reserve Table 🍽️</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Sardar Ji Da Dhaba</div>
+      <span class="footer-logo-hindi">ਸਰਦਾਰ ਜੀ ਦਾ ਢਾਬਾ — ਅਸਲੀ ਪੰਜਾਬੀ ਸੁਆਦ</span>
+      <div class="footer-desc">Serving authentic Punjabi food in Ambala since 1995. Made with love, pure ghee and fresh ingredients every single day.</div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#menu">Our Menu</a>
+      <a href="#specialities">Specialities</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Reserve Table</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+919813076190">+91 98130 76190</a>
+      <a href="https://wa.me/919813076190" target="_blank">WhatsApp Us</a>
+      <a href="#contact">Find Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Sardar Ji Da Dhaba. All rights reserved.</span>
+    <span>Website by <a href="https://portfolio-rho-tan-jh9oenbyop.vercel.app/" target="_blank">Pulkit Kangra</a> 💛</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">✅ Reservation sent! We'll confirm shortly. ਧੰਨਵਾਦ!</div>
+
+<script>
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.transform=`translate(${mx-4}px,${my-4}px)`;
+});
+(function a(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+curR.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(a);})();
+
+const revs=document.querySelectorAll('.rev');
+const obs=new IntersectionObserver(e=>e.forEach(r=>{if(r.isIntersecting)r.target.classList.add('in');}),{threshold:0.1});
+revs.forEach(r=>obs.observe(r));
+
+function filterMenu(btn,cat){
+  document.querySelectorAll('.menu-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.menu-card').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'flex':'none';
+  });
+}
+
+function reserve(){
+  const name=document.getElementById('fname').value;
+  const phone=document.getElementById('fphone').value;
+  const date=document.getElementById('fdate').value;
+  const time=document.getElementById('ftime').value;
+  const guests=document.getElementById('fguests').value;
+  const msg=document.getElementById('fmsg').value;
+  if(!name||!phone){alert('Please enter your name and phone number!');return;}
+  const wa=`ਸਤ ਸ੍ਰੀ ਅਕਾਲ! I want to reserve a table at Sardar Ji Da Dhaba.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${time}\nGuests: ${guests}\nRequest: ${msg}`;
+  window.open(`https://wa.me/919813076190?text=${encodeURIComponent(wa)}`,'_blank');
+  const t=document.getElementById('toast');
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);
+}
+</script>
+</body>
+</html>
