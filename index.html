@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pulkit Kangra — Web Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --c1: #ff3d6b;
+  --c2: #ffbe0b;
+  --c3: #06d6a0;
+  --c4: #4361ee;
+  --bg: #f7f3ee;
+  --dark: #111111;
+  --card: #ffffff;
+  --muted: #888888;
+  --border: rgba(0,0,0,0.08);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background: var(--bg); color: var(--dark); font-family: 'Cabinet Grotesk', sans-serif; overflow-x: hidden; cursor: none; }
+.cursor { width:10px; height:10px; background:var(--dark); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transition:transform 0.1s; }
+.cursor-ring { width:40px; height:40px; border:1.5px solid var(--dark); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; opacity:0.3; }
+body:has(a:hover) .cursor { transform:scale(3); background:var(--c1); }
+nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:1.4rem 2.5rem; display:flex; justify-content:space-between; align-items:center; background: rgba(247,243,238,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.logo { font-family:'Clash Display', sans-serif; font-weight:700; font-size:1.3rem; display:flex; align-items:center; gap:8px; }
+.logo-dot { width:8px; height:8px; background:var(--c1); border-radius:50%; display:inline-block; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.nav-right { display:flex; align-items:center; gap:2rem; }
+.nav-links { display:flex; gap:1.8rem; list-style:none; }
+.nav-links a { font-size:0.85rem; font-weight:500; color:var(--muted); text-decoration:none; letter-spacing:0.04em; transition:color 0.2s; }
+.nav-links a:hover { color:var(--dark); }
+.nav-cta { background:var(--dark); color:#fff; font-family:'Clash Display',sans-serif; font-weight:600; font-size:0.82rem; padding:10px 22px; border-radius:100px; text-decoration:none; letter-spacing:0.04em; transition:background 0.2s, transform 0.2s; }
+.nav-cta:hover { background:var(--c1); transform:scale(1.03); }
+.hero { min-height:100vh; padding:10rem 2.5rem 5rem; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; position:relative; overflow:hidden; }
+.hero-deco { position:absolute; border-radius:50%; filter:blur(60px); opacity:0.18; pointer-events:none; }
+.hero-deco.d1 { width:400px;height:400px;background:var(--c1);top:-80px;right:10%;animation:floatA 9s ease-in-out infinite; }
+.hero-deco.d2 { width:300px;height:300px;background:var(--c2);bottom:5%;left:5%;animation:floatA 7s ease-in-out infinite reverse; }
+.hero-deco.d3 { width:200px;height:200px;background:var(--c3);top:40%;left:30%;animation:floatA 11s ease-in-out infinite; }
+@keyframes floatA { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-25px)} }
+.hero-left { position:relative; z-index:2; }
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--border); border-radius:100px; padding:6px 16px; font-size:0.78rem; font-weight:500; color:var(--muted); margin-bottom:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.06); animation: fadeUp 0.7s ease both; }
+.badge-dot { width:7px;height:7px;background:var(--c3);border-radius:50%;animation:blink 2s infinite; }
+.hero-name { font-family:'Clash Display',sans-serif; font-weight:700; font-size:clamp(3rem,7vw,6.5rem); line-height:0.95; letter-spacing:-0.03em; margin-bottom:1.5rem; animation:fadeUp 0.7s 0.1s ease both; }
+.hero-name .line2 { color:var(--c1); display:block; }
+.hero-name .line3 { color:var(--c4); display:block; font-size:0.6em; font-weight:500; letter-spacing:-0.01em; }
+.hero-tagline { font-size:1.15rem; font-weight:400; color:var(--muted); line-height:1.7; max-width:440px; margin-bottom:2.5rem; animation:fadeUp 0.7s 0.2s ease both; }
+.hero-tagline strong { color:var(--dark); font-weight:600; }
+.hero-actions { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp 0.7s 0.3s ease both; }
+.btn-main { background:var(--dark); color:#fff; font-family:'Clash Display',sans-serif; font-weight:600; font-size:0.9rem; padding:14px 30px; border-radius:12px; text-decoration:none; letter-spacing:0.03em; display:inline-flex; align-items:center; gap:8px; transition:transform 0.2s, box-shadow 0.2s; }
+.btn-main:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.15); }
+.btn-wa { background:#25d366; color:#fff; font-family:'Clash Display',sans-serif; font-weight:600; font-size:0.9rem; padding:14px 30px; border-radius:12px; text-decoration:none; letter-spacing:0.03em; display:inline-flex; align-items:center; gap:8px; transition:transform 0.2s, box-shadow 0.2s; }
+.btn-wa:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(37,211,102,0.3); }
+.hero-right { position:relative; z-index:2; animation:fadeUp 0.7s 0.2s ease both; }
+.hero-card { background:#fff; border-radius:24px; padding:2.5rem; border:1px solid var(--border); box-shadow:0 20px 60px rgba(0,0,0,0.08); position:relative; overflow:hidden; }
+.hero-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4)); }
+.hcard-avatar { width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg,var(--c1),var(--c2)); display:flex; align-items:center; justify-content:center; font-size:2rem; margin-bottom:1.5rem; }
+.hcard-name { font-family:'Clash Display',sans-serif; font-weight:700; font-size:1.4rem; margin-bottom:4px; }
+.hcard-role { color:var(--muted); font-size:0.88rem; margin-bottom:1.5rem; }
+.hcard-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem; }
+.hstat { background:var(--bg); border-radius:12px; padding:1rem; text-align:center; }
+.hstat-num { font-family:'Clash Display',sans-serif; font-weight:700; font-size:1.5rem; color:var(--c1); }
+.hstat-label { font-size:0.72rem; color:var(--muted); margin-top:2px; }
+.hcard-available { display:flex; align-items:center; gap:10px; background:#f0fdf6; border:1px solid #bbf7d0; border-radius:10px; padding:12px 16px; font-size:0.82rem; font-weight:500; color:#16a34a; }
+.avail-dot { width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 1.5s infinite; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+.marquee-wrap { overflow:hidden; background:var(--dark); color:#fff; padding:1rem 0; border-top:1px solid rgba(255,255,255,0.05); }
+.marquee-track { display:flex; gap:3rem; animation:marquee 18s linear infinite; width:max-content; }
+.marquee-track span { font-family:'Clash Display',sans-serif; font-size:0.85rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; opacity:0.6; }
+.marquee-track span.accent { color:var(--c2); opacity:1; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+section { padding:6rem 2.5rem; }
+.sec-label { font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; color:var(--c1); margin-bottom:0.75rem; }
+.sec-title { font-family:'Clash Display',sans-serif; font-weight:700; font-size:clamp(2rem,5vw,3.2rem); line-height:1.05; letter-spacing:-0.025em; margin-bottom:0.75rem; }
+.sec-sub { color:var(--muted); font-size:1rem; line-height:1.7; max-width:500px; margin-bottom:3rem; }
+#services { background:#fff; }
+.services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+.svc-card { border:1.5px solid var(--border); border-radius:20px; padding:2rem; transition:transform 0.25s, box-shadow 0.25s, border-color 0.25s; position:relative; overflow:hidden; background:#fff; }
+.svc-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px rgba(0,0,0,0.09); }
+.svc-card.c1:hover { border-color:var(--c1); }
+.svc-card.c2:hover { border-color:var(--c2); }
+.svc-card.c3:hover { border-color:var(--c3); }
+.svc-num { font-family:'Clash Display',sans-serif; font-weight:700; font-size:3rem; line-height:1; opacity:0.07; position:absolute; top:1.5rem; right:1.5rem; }
+.svc-icon { font-size:2.2rem; margin-bottom:1.2rem; display:block; }
+.svc-card h3 { font-family:'Clash Display',sans-serif; font-weight:600; font-size:1.2rem; margin-bottom:0.6rem; }
+.svc-card p { font-size:0.88rem; color:var(--muted); line-height:1.7; margin-bottom:1.5rem; }
+.svc-features { list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:1.5rem; }
+.svc-features li { font-size:0.82rem; color:var(--muted); display:flex; align-items:center; gap:8px; }
+.svc-features li::before { content:'✓'; font-weight:700; color:var(--c3); font-size:0.75rem; }
+.svc-price { font-family:'Clash Display',sans-serif; font-weight:700; font-size:1.1rem; display:flex; align-items:baseline; gap:4px; }
+.svc-price .from { font-size:0.72rem; font-weight:400; color:var(--muted); }
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+.proj-card { border-radius:20px; overflow:hidden; border:1px solid var(--border); background:#fff; transition:transform 0.25s, box-shadow 0.25s; }
+.proj-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.1); }
+.proj-thumb { height:190px; display:flex; align-items:center; justify-content:center; font-size:4rem; position:relative; }
+.proj-thumb.p1 { background:linear-gradient(135deg,#fff5f7,#ffe0e8); }
+.proj-thumb.p2 { background:linear-gradient(135deg,#fffbeb,#fef3c7); }
+.proj-thumb.p3 { background:linear-gradient(135deg,#f0fdf4,#dcfce7); }
+.proj-badge { position:absolute; bottom:12px; left:12px; font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; background:rgba(255,255,255,0.9); border-radius:100px; padding:4px 12px; color:var(--dark); }
+.proj-body { padding:1.5rem; }
+.proj-body h3 { font-family:'Clash Display',sans-serif; font-weight:600; font-size:1.1rem; margin-bottom:0.4rem; }
+.proj-body p { font-size:0.85rem; color:var(--muted); line-height:1.65; margin-bottom:1.2rem; }
+.proj-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:1.2rem; }
+.proj-tag { font-size:0.7rem; font-weight:600; padding:3px 10px; border-radius:100px; letter-spacing:0.04em; }
+.proj-tag.t1 { background:#fff0f3; color:var(--c1); }
+.proj-tag.t2 { background:#fffbeb; color:#d97706; }
+.proj-tag.t3 { background:#f0fdf4; color:#16a34a; }
+.proj-tag.t4 { background:#eff6ff; color:var(--c4); }
+.proj-link { font-size:0.82rem; font-weight:600; color:var(--c4); text-decoration:none; display:inline-flex; align-items:center; gap:5px; transition:gap 0.2s; }
+.proj-link:hover { gap:9px; }
+#process { background:#fff; }
+.process-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; position:relative; }
+.process-steps::before { content:''; position:absolute; top:2.5rem; left:10%; right:10%; height:1px; background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4)); opacity:0.3; }
+.step { text-align:center; padding:2rem 1.5rem; position:relative; z-index:1; }
+.step-num { width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Clash Display',sans-serif; font-weight:700; font-size:1.1rem; margin:0 auto 1.2rem; color:#fff; }
+.step:nth-child(1) .step-num { background:var(--c1); }
+.step:nth-child(2) .step-num { background:var(--c2); color:var(--dark); }
+.step:nth-child(3) .step-num { background:var(--c3); color:var(--dark); }
+.step:nth-child(4) .step-num { background:var(--c4); }
+.step h4 { font-family:'Clash Display',sans-serif; font-weight:600; font-size:1rem; margin-bottom:0.5rem; }
+.step p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+#contact { background:var(--bg); }
+.contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:3rem; align-items:start; }
+.contact-info h2 { font-family:'Clash Display',sans-serif; font-weight:700; font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.1; letter-spacing:-0.02em; margin-bottom:1rem; }
+.contact-info h2 span { color:var(--c1); }
+.contact-info p { color:var(--muted); line-height:1.7; margin-bottom:2rem; }
+.cinfo-row { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); font-size:0.88rem; }
+.cinfo-icon { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+.cinfo-icon.ic1 { background:#fff0f3; }
+.cinfo-icon.ic2 { background:#f0fdf4; }
+.cinfo-icon.ic3 { background:#eff6ff; }
+.cinfo-val { font-weight:500; }
+.cinfo-desc { font-size:0.75rem; color:var(--muted); }
+.social-row { display:flex; gap:10px; margin-top:1.5rem; }
+.social-btn { display:flex; align-items:center; gap:8px; padding:10px 18px; border-radius:10px; font-size:0.82rem; font-weight:600; text-decoration:none; border:1.5px solid var(--border); color:var(--dark); transition:background 0.2s, border-color 0.2s; }
+.social-btn:hover { background:#fff; border-color:var(--dark); }
+.contact-form { background:#fff; border-radius:24px; padding:2.5rem; border:1px solid var(--border); box-shadow:0 10px 40px rgba(0,0,0,0.06); }
+.contact-form h3 { font-family:'Clash Display',sans-serif; font-weight:700; font-size:1.3rem; margin-bottom:1.5rem; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.field { display:flex; flex-direction:column; gap:6px; margin-bottom:1rem; }
+.field label { font-size:0.78rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); }
+.field input, .field textarea, .field select { background:var(--bg); border:1.5px solid var(--border); border-radius:10px; padding:12px 16px; font-family:'Cabinet Grotesk',sans-serif; font-size:0.9rem; color:var(--dark); outline:none; transition:border-color 0.2s, box-shadow 0.2s; width:100%; }
+.field input:focus, .field textarea:focus, .field select:focus { border-color:var(--c4); box-shadow:0 0 0 3px rgba(67,97,238,0.1); }
+.field textarea { resize:vertical; min-height:100px; }
+.field input::placeholder, .field textarea::placeholder { color:#bbb; }
+.btn-send { width:100%; background:var(--dark); color:#fff; font-family:'Clash Display',sans-serif; font-weight:700; font-size:0.95rem; padding:14px; border-radius:12px; border:none; cursor:pointer; letter-spacing:0.04em; transition:background 0.2s, transform 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-send:hover { background:var(--c1); transform:translateY(-1px); }
+footer { background:var(--dark); color:#fff; padding:3rem 2.5rem 2rem; }
+.footer-top { display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.08); flex-wrap:wrap; gap:2rem; }
+.footer-logo { font-family:'Clash Display',sans-serif; font-weight:700; font-size:1.5rem; margin-bottom:0.5rem; }
+.footer-logo span { color:var(--c1); }
+.footer-desc { color:rgba(255,255,255,0.4); font-size:0.85rem; max-width:280px; line-height:1.6; }
+.footer-links { display:flex; flex-direction:column; gap:10px; }
+.footer-links a { color:rgba(255,255,255,0.5); font-size:0.85rem; text-decoration:none; transition:color 0.2s; }
+.footer-links a:hover { color:var(--c2); }
+.footer-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:1.5rem; font-size:0.78rem; color:rgba(255,255,255,0.3); flex-wrap:wrap; gap:1rem; }
+.footer-bottom a { color:var(--c2); text-decoration:none; }
+#about { background:#fff; }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+.about-img-wrap { border-radius:24px; overflow:hidden; background:linear-gradient(135deg,#fff5f7,#fffbeb,#f0fdf4); border:1px solid var(--border); padding:3rem 2rem; text-align:center; position:relative; }
+.about-emoji { font-size:5rem; display:block; margin-bottom:1rem; }
+.about-name-card { font-family:'Clash Display',sans-serif; font-weight:700; font-size:1.3rem; margin-bottom:4px; }
+.about-loc { color:var(--muted); font-size:0.85rem; margin-bottom:1.5rem; }
+.about-tags { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.about-tag { font-size:0.75rem; font-weight:600; padding:5px 14px; border-radius:100px; border:1.5px solid var(--border); background:#fff; color:var(--dark); }
+.about-right h2 { font-family:'Clash Display',sans-serif; font-weight:700; font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.1; letter-spacing:-0.02em; margin-bottom:1.2rem; }
+.about-right h2 span { color:var(--c4); }
+.about-right p { color:var(--muted); line-height:1.8; font-size:0.95rem; margin-bottom:1rem; }
+.about-right p strong { color:var(--dark); font-weight:600; }
+.yt-card { margin-top:1.8rem; background:linear-gradient(135deg,#fff5f5,#fff); border:1.5px solid #fecdd3; border-radius:16px; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--dark); transition:transform 0.2s, box-shadow 0.2s; }
+.yt-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(255,61,107,0.12); }
+.yt-icon { font-size:2rem; flex-shrink:0; }
+.yt-info { flex:1; }
+.yt-label { font-size:0.7rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--c1); margin-bottom:3px; }
+.yt-title { font-family:'Clash Display',sans-serif; font-weight:700; font-size:1rem; margin-bottom:2px; }
+.yt-desc { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+.yt-arrow { font-size:1.2rem; color:var(--c1); }
+
+/* ===== PRICE CALCULATOR ===== */
+#calculator { background: var(--bg); padding: 6rem 2.5rem; }
+.calc-wrap { max-width: 980px; margin: 0 auto; }
+.calc-header { text-align: center; margin-bottom: 3rem; }
+.calc-header p { color: var(--muted); font-size: 0.95rem; }
+.calc-box { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
+.calc-group { margin-bottom: 1.8rem; }
+.calc-group-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+.type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.type-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 0.9rem 1rem; cursor: pointer; background: #fff; transition: all 0.2s; position: relative; overflow: hidden; }
+.type-card:hover { border-color: var(--c4); }
+.type-card.active { border-color: var(--c4); background: #eff6ff; }
+.type-card.active::before { content: '✓'; position: absolute; top: 6px; right: 8px; font-size: 0.7rem; font-weight: 700; color: var(--c4); }
+.type-icon { font-size: 1.4rem; margin-bottom: 4px; display: block; }
+.type-name { font-family: 'Clash Display', sans-serif; font-weight: 700; font-size: 0.85rem; margin-bottom: 2px; }
+.type-price { font-size: 0.75rem; color: var(--muted); }
+.type-card.active .type-price { color: var(--c4); font-weight: 600; }
+.pages-row { display: flex; align-items: center; gap: 1rem; background: #fff; border-radius: 12px; padding: 0.75rem 1rem; border: 1px solid var(--border); }
+.pages-label { flex: 1; font-size: 0.88rem; font-weight: 500; }
+.pages-controls { display: flex; align-items: center; gap: 0.75rem; }
+.page-ctrl { width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--bg); font-size: 1.1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: var(--dark); font-family: 'Clash Display', sans-serif; }
+.page-ctrl:hover { border-color: var(--c4); color: var(--c4); }
+.page-count { font-family: 'Clash Display', sans-serif; font-weight: 800; font-size: 1.1rem; min-width: 24px; text-align: center; color: var(--c4); }
+.pages-note { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+.calc-checks { display: flex; flex-direction: column; gap: 0.5rem; }
+.calc-check { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; cursor: pointer; transition: all 0.2s; user-select: none; }
+.calc-check:hover { border-color: var(--c4); background: #f8f9ff; }
+.calc-check.checked { border-color: var(--c4); background: #eff6ff; }
+.check-box { width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 0.7rem; }
+.calc-check.checked .check-box { background: var(--c4); border-color: var(--c4); color: #fff; }
+.check-label { flex: 1; font-size: 0.84rem; font-weight: 500; }
+.check-price { font-family: 'Clash Display', sans-serif; font-weight: 700; font-size: 0.78rem; color: var(--muted); }
+.calc-check.checked .check-price { color: var(--c4); }
+.calc-result { background: var(--dark); border-radius: 20px; padding: 2rem; color: #fff; position: relative; overflow: hidden; }
+.calc-result::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c4)); }
+.result-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem; }
+.result-empty { text-align: center; padding: 1.5rem 0; color: rgba(255,255,255,0.3); font-size: 0.85rem; line-height: 1.7; }
+.result-empty-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+.result-prices { display: none; }
+.result-range-wrap { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1rem; text-align: center; }
+.result-from { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+.result-low { font-family: 'Clash Display', sans-serif; font-weight: 800; font-size: 1.6rem; color: #fff; }
+.result-to { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin: 4px 0; }
+.result-high { font-family: 'Clash Display', sans-serif; font-weight: 800; font-size: 1.6rem; color: #ffd600; }
+.result-breakdown { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.breakdown-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem; }
+.breakdown-item { display: flex; justify-content: space-between; font-size: 0.8rem; padding: 3px 0; color: rgba(255,255,255,0.6); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.breakdown-item:last-child { border-bottom: none; }
+.bi-val { color: #fff; font-weight: 600; }
+.breakdown-total { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; padding-top: 0.6rem; margin-top: 0.4rem; border-top: 1px solid rgba(255,255,255,0.1); color: #fff; }
+.result-delivery { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
+.del-dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; flex-shrink: 0; }
+.btn-get-quote { width: 100%; background: #25d366; color: #fff; font-family: 'Clash Display', sans-serif; font-weight: 700; font-size: 0.88rem; padding: 12px; border-radius: 10px; border: none; cursor: pointer; letter-spacing: 0.04em; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 0.6rem; }
+.btn-get-quote:hover { background: #1fb855; transform: translateY(-1px); }
+.btn-reset-calc { width: 100%; background: transparent; border: 1.5px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); font-family: 'Clash Display', sans-serif; font-weight: 600; font-size: 0.8rem; padding: 9px; border-radius: 10px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em; }
+.btn-reset-calc:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); }
+.delivery-guide { margin-top: 1.2rem; background: #fff; border-radius: 14px; padding: 1.2rem; border: 1px solid var(--border); }
+.dg-title { font-family: 'Clash Display', sans-serif; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem; color: var(--dark); }
+.dg-row { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); padding: 3px 0; }
+.dg-row span:last-child { font-weight: 600; color: var(--dark); }
+
+/* Scroll reveal */
+.hamburger {
+  display:none; flex-direction:column; gap:5px; cursor:pointer;
+  padding:4px; background:none; border:none;
+}
+.hamburger span { width:24px; height:2px; background:var(--dark); border-radius:2px; transition:all 0.3s; display:block; }
+.hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+.mobile-menu {
+  display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+  background:rgba(247,243,238,0.98); backdrop-filter:blur(12px);
+  z-index:190; flex-direction:column; align-items:center; justify-content:center;
+  gap:2rem;
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a { font-family:'Clash Display',sans-serif; font-weight:700; font-size:2rem; color:var(--dark); text-decoration:none; letter-spacing:-0.02em; transition:color 0.2s; }
+.mobile-menu a:hover { color:var(--c1); }
+@media(max-width:768px){ .hamburger { display:flex; } }
+.rev.in { opacity:1; transform:translateY(0); }
+.rev-d1 { transition-delay:0.1s; }
+.rev-d2 { transition-delay:0.2s; }
+.rev-d3 { transition-delay:0.3s; }
+
+/* Toast */
+.toast { position:fixed; bottom:2rem; right:2rem; background:var(--dark); color:#fff; padding:14px 24px; border-radius:12px; font-size:0.88rem; font-weight:500; box-shadow:0 8px 30px rgba(0,0,0,0.2); transform:translateY(80px); opacity:0; transition:all 0.4s ease; z-index:999; border-left:4px solid var(--c3); }
+.toast.show { transform:translateY(0); opacity:1; }
+
+@media(max-width:768px){
+  /* Nav */
+  nav { padding:1rem 1.2rem; }
+  .nav-links { display:none; }
+  .nav-cta { padding:8px 16px; font-size:0.78rem; }
+
+  /* Hero */
+  .hero { grid-template-columns:1fr; padding:7rem 1.2rem 3rem; gap:2rem; }
+  .hero-right { display:none; }
+  .hero-name { font-size:clamp(2.5rem,12vw,4rem); }
+  .hero-tagline { font-size:1rem; }
+  .hero-actions { flex-direction:column; }
+  .btn-main, .btn-wa { width:100%; justify-content:center; padding:13px 20px; }
+
+  /* Sections */
+  section { padding:3.5rem 1.2rem; }
+  .sec-title { font-size:clamp(1.8rem,7vw,2.5rem); }
+  .sec-sub { font-size:0.9rem; }
+
+  /* About */
+  .about-grid { grid-template-columns:1fr; gap:2rem; }
+  .about-img-wrap { padding:2rem 1.5rem; }
+  .about-emoji { font-size:3.5rem; }
+  .yt-card { flex-direction:column; text-align:center; }
+  .yt-arrow { display:none; }
+
+  /* Services */
+  .services-grid { grid-template-columns:1fr; }
+  .svc-card { padding:1.5rem; }
+
+  /* Projects */
+  .projects-grid { grid-template-columns:1fr; }
+  .proj-thumb { height:160px; }
+
+  /* Process */
+  .process-steps { grid-template-columns:1fr 1fr; gap:1rem; }
+  .process-steps::before { display:none; }
+  .step { padding:1.5rem 1rem; }
+
+  /* Calculator */
+  #calculator { padding: 3.5rem 1.2rem; }
+  .calc-box { grid-template-columns:1fr; }
+  .type-grid { grid-template-columns:1fr 1fr; gap:0.5rem; }
+  .type-card { padding:0.75rem; }
+  .type-icon { font-size:1.2rem; }
+  .type-name { font-size:0.78rem; }
+  .type-price { font-size:0.68rem; }
+  .calc-result { margin-top:0; }
+  .result-low, .result-high { font-size:1.3rem; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns:1fr; gap:2rem; }
+  .form-row { grid-template-columns:1fr; }
+  .social-row { flex-wrap:wrap; }
+  .social-btn { font-size:0.78rem; padding:8px 14px; }
+
+  /* Footer */
+  .footer-top { flex-direction:column; gap:1.5rem; }
+  .footer-bottom { flex-direction:column; text-align:center; gap:0.5rem; }
+
+  /* Marquee */
+  .marquee-track { gap:1.5rem; }
+  .marquee-track span { font-size:0.75rem; }
+
+  /* Cursor — hide on touch */
+  .cursor, .cursor-ring { display:none; }
+  body { cursor:auto; }
+}
+
+/* Extra small screens */
+@media(max-width:400px){
+  .hero-name { font-size:2.5rem; }
+  .type-grid { grid-template-columns:1fr; }
+  .process-steps { grid-template-columns:1fr; }
+  .hcard-stats { grid-template-columns:1fr 1fr; }
+  .pages-row { flex-direction:column; align-items:flex-start; gap:0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><span class="logo-dot"></span> Pulkit Kangra</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#calculator">Pricing</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://wa.me/919813076190" target="_blank" class="nav-cta">💬 WhatsApp Me</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#projects" onclick="toggleMenu()">Work</a>
+  <a href="#calculator" onclick="toggleMenu()">Pricing</a>
+  <a href="#process" onclick="toggleMenu()">Process</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="https://wa.me/919813076190" target="_blank" style="color:var(--c3)">💬 WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-deco d1"></div>
+  <div class="hero-deco d2"></div>
+  <div class="hero-deco d3"></div>
+  <div class="hero-left">
+    <div class="hero-badge"><span class="badge-dot"></span> Open for new projects</div>
+    <h1 class="hero-name">
+      Pulkit<br>
+      <span class="line2">Kangra</span>
+      <span class="line3">Web Developer · Ambala, India</span>
+    </h1>
+    <p class="hero-tagline">
+      <strong>Professional websites for every budget.</strong><br>
+      I build fast, beautiful business websites that help you look credible and win more customers.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-main">View My Work →</a>
+      <a href="https://wa.me/919813076190?text=Hi%20Pulkit%2C%20I%20need%20a%20website!" target="_blank" class="btn-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hcard-avatar">👨‍💻</div>
+      <div class="hcard-name">Pulkit Kangra</div>
+      <div class="hcard-role">Web Developer · Ambala, Haryana</div>
+      <div class="hcard-stats">
+        <div class="hstat"><div class="hstat-num">10+</div><div class="hstat-label">Projects Done</div></div>
+        <div class="hstat"><div class="hstat-num">100%</div><div class="hstat-label">Satisfaction</div></div>
+        <div class="hstat"><div class="hstat-num">3 Days</div><div class="hstat-label">Avg Delivery</div></div>
+        <div class="hstat"><div class="hstat-num">₹8k+</div><div class="hstat-label">Starting at</div></div>
+      </div>
+      <div class="hcard-available"><span class="avail-dot"></span> Available for new projects</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Business Websites</span><span class="accent">★</span>
+    <span>Landing Pages</span><span class="accent">★</span>
+    <span>Fast Delivery</span><span class="accent">★</span>
+    <span>Mobile Friendly</span><span class="accent">★</span>
+    <span>Affordable Prices</span><span class="accent">★</span>
+    <span>Professional Design</span><span class="accent">★</span>
+    <span>Business Websites</span><span class="accent">★</span>
+    <span>Landing Pages</span><span class="accent">★</span>
+    <span>Fast Delivery</span><span class="accent">★</span>
+    <span>Mobile Friendly</span><span class="accent">★</span>
+    <span>Affordable Prices</span><span class="accent">★</span>
+    <span>Professional Design</span><span class="accent">★</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">Who I am</div>
+  <div class="about-grid">
+    <div class="about-left rev">
+      <div class="about-img-wrap">
+        <span class="about-emoji">👨‍💻</span>
+        <div class="about-name-card">Pulkit Kangra</div>
+        <div class="about-loc">📍 Ambala, Haryana, India</div>
+        <div class="about-tags">
+          <span class="about-tag">Web Developer</span>
+          <span class="about-tag">Trader</span>
+          <span class="about-tag">Creator</span>
+          <span class="about-tag">Thinker</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-right rev rev-d2">
+      <h2>More than just a<br><span>developer</span></h2>
+      <p>Hi, I'm Pulkit Kangra from Ambala, Haryana. I'm a web developer who believes that <strong>every business deserves a professional online presence</strong> — regardless of budget.</p>
+      <p>Beyond building websites, I'm also a <strong>stock market trader</strong> — which means I understand how businesses think, how money flows, and what it takes to grow. That perspective makes me a better developer for my clients.</p>
+      <p>I'm passionate about sharing knowledge and ideas. On my YouTube channel <strong>Kangra's Perspective</strong>, I explore Indian philosophy, self-improvement, and Sanatan wisdom — because I believe a strong mind builds a strong life.</p>
+      <a href="https://www.youtube.com/@mohmaya.mukt123" target="_blank" class="yt-card">
+        <span class="yt-icon">▶️</span>
+        <div class="yt-info">
+          <div class="yt-label">YouTube Channel</div>
+          <div class="yt-title">Kangra's Perspective</div>
+          <div class="yt-desc">भारत का रहने वाला हूँ भारत की बात सुनाता हूँ — Life philosophy & Sanatan wisdom</div>
+        </div>
+        <span class="yt-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-label">What I offer</div>
+  <h2 class="sec-title rev">Business websites<br>that actually work</h2>
+  <p class="sec-sub rev">I build clean, fast, mobile-friendly websites for businesses of all sizes — at prices that make sense.</p>
+  <div class="services-grid">
+    <div class="svc-card c1 rev rev-d1">
+      <div class="svc-num">01</div>
+      <span class="svc-icon">🗂️</span>
+      <h3>Static / Portfolio Site</h3>
+      <p>Perfect for freelancers, artists, and professionals who need a clean online presence to showcase their work.</p>
+      <ul class="svc-features">
+        <li>Up to 3 pages included</li>
+        <li>Mobile responsive</li>
+        <li>Fast loading speed</li>
+        <li>Contact form</li>
+        <li>Delivered in 3–5 days</li>
+      </ul>
+      <div class="svc-price"><span class="from">From</span> ₹8,000</div>
+    </div>
+    <div class="svc-card c2 rev rev-d2">
+      <div class="svc-num">02</div>
+      <span class="svc-icon">🏪</span>
+      <h3>Business Website</h3>
+      <p>Complete professional website for your business. Multiple pages, contact form, and everything you need to look credible online.</p>
+      <ul class="svc-features">
+        <li>Up to 3 pages included</li>
+        <li>Mobile responsive</li>
+        <li>Contact form + WhatsApp</li>
+        <li>Google Maps integration</li>
+        <li>Delivered in 7–14 days</li>
+      </ul>
+      <div class="svc-price"><span class="from">From</span> ₹18,000</div>
+    </div>
+    <div class="svc-card c3 rev rev-d3">
+      <div class="svc-num">03</div>
+      <span class="svc-icon">🛒</span>
+      <h3>E-Commerce Store</h3>
+      <p>Full online store with product catalog, cart, payment gateway and order management — ready to sell online!</p>
+      <ul class="svc-features">
+        <li>Product catalog</li>
+        <li>Payment gateway</li>
+        <li>Order management</li>
+        <li>Mobile responsive</li>
+        <li>Delivered in 3–5 weeks</li>
+      </ul>
+      <div class="svc-price"><span class="from">From</span> ₹40,000</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--bg)">
+  <div class="sec-label">My work</div>
+  <h2 class="sec-title rev">Sample projects</h2>
+  <p class="sec-sub rev">Here are some websites I've built. Every project is custom-designed for the client's needs.</p>
+  <div class="projects-grid">
+    <div class="proj-card rev rev-d1">
+      <div class="proj-thumb p2">⚡<span class="proj-badge">Electronics</span></div>
+      <div class="proj-body">
+        <h3>TechZone Electronics</h3>
+        <p>Modern electronics shop website with product catalog, filter by category, enquiry form and WhatsApp integration.</p>
+        <div class="proj-tags">
+          <span class="proj-tag t1">HTML/CSS</span>
+          <span class="proj-tag t2">JavaScript</span>
+          <span class="proj-tag t3">Responsive</span>
+        </div>
+        <a href="/Portfolio-main/techzone" class="proj-link" target="_blank">View project →</a>
+      </div>
+    </div>
+    <div class="proj-card rev rev-d2">
+      <div class="proj-thumb p3">🍛<span class="proj-badge">Restaurant</span></div>
+      <div class="proj-body">
+        <h3>Sardar Ji Da Dhaba</h3>
+        <p>Premium Punjabi dhaba website with full menu, table reservation form, gallery and Hindi + Punjabi content.</p>
+        <div class="proj-tags">
+          <span class="proj-tag t2">Landing Page</span>
+          <span class="proj-tag t3">Responsive</span>
+          <span class="proj-tag t4">WhatsApp</span>
+        </div>
+        <a href="/Portfolio-main/dhaba/dhaba" class="proj-link" target="_blank">View project →</a>
+      </div>
+    </div>
+    <div class="proj-card rev rev-d3">
+      <div class="proj-thumb p1">💼<span class="proj-badge">Portfolio</span></div>
+      <div class="proj-body">
+        <h3>This Portfolio</h3>
+        <p>This very website! A modern developer portfolio with price calculator, WhatsApp integration and smooth animations.</p>
+        <div class="proj-tags">
+          <span class="proj-tag t1">HTML/CSS</span>
+          <span class="proj-tag t4">JavaScript</span>
+          <span class="proj-tag t3">Responsive</span>
+        </div>
+        <a href="#" class="proj-link">You're looking at it 😄</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE CALCULATOR -->
+<section id="calculator">
+  <div class="calc-wrap">
+    <div class="calc-header">
+      <div class="sec-label">Instant Price Estimate</div>
+      <h2 class="sec-title rev">How much will your website cost?</h2>
+      <p class="rev">Select your requirements and get an instant price range — no hidden charges!</p>
+    </div>
+    <div class="calc-box rev">
+      <!-- LEFT -->
+      <div class="calc-left">
+        <div class="calc-group">
+          <div class="calc-group-title">🌐 Website Type</div>
+          <div class="type-grid">
+            <div class="type-card" onclick="setType(this, 8000, 'Static / Portfolio')">
+              <span class="type-icon">🗂️</span>
+              <div class="type-name">Static / Portfolio</div>
+              <div class="type-price">From ₹8,000</div>
+            </div>
+            <div class="type-card" onclick="setType(this, 18000, 'Business Website')">
+              <span class="type-icon">🏪</span>
+              <div class="type-name">Business Website</div>
+              <div class="type-price">From ₹18,000</div>
+            </div>
+            <div class="type-card" onclick="setType(this, 40000, 'E-Commerce Store')">
+              <span class="type-icon">🛒</span>
+              <div class="type-name">E-Commerce Store</div>
+              <div class="type-price">From ₹40,000</div>
+            </div>
+            <div class="type-card" onclick="setType(this, 60000, 'Custom Web App')">
+              <span class="type-icon">⚙️</span>
+              <div class="type-name">Custom Web App</div>
+              <div class="type-price">From ₹60,000</div>
+            </div>
+          </div>
+        </div>
+        <div class="calc-group">
+          <div class="calc-group-title">📄 Number of Pages</div>
+          <div class="pages-row">
+            <div class="pages-label">How many pages do you need?</div>
+            <div class="pages-controls">
+              <button class="page-ctrl" onclick="changePage(-1)">−</button>
+              <div class="page-count" id="pageCount">3</div>
+              <button class="page-ctrl" onclick="changePage(1)">+</button>
+            </div>
+          </div>
+          <div class="pages-note">First 3 pages included · Each extra page +₹1,500</div>
+        </div>
+        <div class="calc-group">
+          <div class="calc-group-title">⚡ Features</div>
+          <div class="calc-checks">
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">🔧 Admin Panel (manage content)</span><span class="check-price" data-price="8000">+₹8,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">💳 Online Payment Gateway</span><span class="check-price" data-price="10000">+₹10,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">🤖 AI Chatbot (24/7)</span><span class="check-price" data-price="7000">+₹7,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">📝 Blog / News Section</span><span class="check-price" data-price="5000">+₹5,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">📅 Booking / Appointment System</span><span class="check-price" data-price="9000">+₹9,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">📦 Order / Status Tracking</span><span class="check-price" data-price="6000">+₹6,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">🌍 Multi-language Support</span><span class="check-price" data-price="5000">+₹5,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">📬 Enquiry Forms + Email Alerts</span><span class="check-price" data-price="3000">+₹3,000</span></label>
+          </div>
+        </div>
+        <div class="calc-group">
+          <div class="calc-group-title">🎁 Add-ons</div>
+          <div class="calc-checks">
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">🎨 Logo Design</span><span class="check-price" data-price="3000">+₹3,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">🔍 SEO + Google Business Setup</span><span class="check-price" data-price="6000">+₹6,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">🌐 Hosting + Domain Setup (1 year)</span><span class="check-price" data-price="4000">+₹4,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">🛡️ 1-Year Maintenance Plan</span><span class="check-price" data-price="12000">+₹12,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">✍️ Content Writing</span><span class="check-price" data-price="5000">+₹5,000</span></label>
+            <label class="calc-check" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-label">📱 Social Media Setup</span><span class="check-price" data-price="4000">+₹4,000</span></label>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT -->
+      <div class="calc-right">
+        <div class="calc-result">
+          <div class="result-label">Your Estimate</div>
+          <div class="result-empty" id="resultEmpty">
+            <span class="result-empty-icon">🧮</span>
+            Select a website type on the left to see your instant price estimate!
+          </div>
+          <div class="result-prices" id="resultPrices">
+            <div class="result-range-wrap">
+              <div class="result-from">Estimated Range</div>
+              <div class="result-low" id="resultLow">₹0</div>
+              <div class="result-to">to</div>
+              <div class="result-high" id="resultHigh">₹0</div>
+            </div>
+            <div class="result-breakdown">
+              <div class="breakdown-title">Price Breakdown</div>
+              <div id="breakdownItems"></div>
+              <div class="breakdown-total"><span>Subtotal</span><span id="subtotalEl">₹0</span></div>
+            </div>
+            <div class="result-delivery">
+              <div class="del-dot"></div>
+              <span id="deliveryText">Estimated delivery: 5–7 days</span>
+            </div>
+            <button class="btn-get-quote" onclick="getQuote()">💬 Get Exact Quote on WhatsApp</button>
+            <button class="btn-reset-calc" onclick="resetCalc()">↺ Reset Calculator</button>
+          </div>
+        </div>
+        <div class="delivery-guide">
+          <div class="dg-title">⏱️ Delivery Time Guide</div>
+          <div class="dg-row"><span>Static / Portfolio</span><span>3–5 days</span></div>
+          <div class="dg-row"><span>Business Website</span><span>7–14 days</span></div>
+          <div class="dg-row"><span>E-Commerce Store</span><span>3–5 weeks</span></div>
+          <div class="dg-row"><span>Custom Web App</span><span>6–12 weeks</span></div>
+          <div class="dg-row"><span>With SEO + Content</span><span>Add 3–5 days</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="sec-label">How I work</div>
+  <h2 class="sec-title rev">Simple 4-step process</h2>
+  <p class="sec-sub rev">From first message to live website — here's exactly what happens.</p>
+  <div class="process-steps">
+    <div class="step rev rev-d1"><div class="step-num">01</div><h4>You contact me</h4><p>Message me on WhatsApp or email. Tell me about your business and what you need.</p></div>
+    <div class="step rev rev-d2"><div class="step-num">02</div><h4>We discuss & plan</h4><p>I understand your requirements, suggest the best solution, and give you a clear quote.</p></div>
+    <div class="step rev rev-d3"><div class="step-num">03</div><h4>I build your site</h4><p>I design and develop your website within the agreed timeline. You review and give feedback.</p></div>
+    <div class="step rev"><div class="step-num">04</div><h4>Go live!</h4><p>Your website goes live. I help you with deployment and provide 1 month of free support.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label">Get in touch</div>
+  <div class="contact-grid">
+    <div class="contact-info rev">
+      <h2>Let's build your<br><span>website</span> together</h2>
+      <p>Have a project in mind? I'd love to hear about it. Reach out and I'll get back to you within a few hours.</p>
+      <div class="cinfo-row"><div class="cinfo-icon ic1">📧</div><div><div class="cinfo-val">pulkitkangra1@gmail.com</div><div class="cinfo-desc">Email me anytime</div></div></div>
+      <div class="cinfo-row"><div class="cinfo-icon ic2">💬</div><div><div class="cinfo-val">+91 98130 76190</div><div class="cinfo-desc">WhatsApp — fastest response</div></div></div>
+      <div class="cinfo-row"><div class="cinfo-icon ic3">📍</div><div><div class="cinfo-val">Ambala, Haryana</div><div class="cinfo-desc">India · Working worldwide</div></div></div>
+      <div class="social-row">
+        <a href="#" class="social-btn">in LinkedIn</a>
+        <a href="#" class="social-btn">📸 Instagram</a>
+        <a href="https://wa.me/919813076190" target="_blank" class="social-btn" style="background:#25d366;color:#fff;border-color:#25d366;">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="contact-form rev rev-d2">
+      <h3>Send me a message</h3>
+      <div class="form-row">
+        <div class="field"><label>Your Name</label><input type="text" placeholder="e.g. Rahul Sharma" id="fname"/></div>
+        <div class="field"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 XXXXX XXXXX" id="fphone"/></div>
+      </div>
+      <div class="field"><label>Email</label><input type="email" placeholder="your@email.com" id="femail"/></div>
+      <div class="field">
+        <label>What do you need?</label>
+        <select id="fservice">
+          <option value="">Select a service...</option>
+          <option>Static / Portfolio Site</option>
+          <option>Business Website</option>
+          <option>E-Commerce Store</option>
+          <option>Custom Web App</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="field"><label>Tell me about your project</label><textarea placeholder="Describe your business and what kind of website you need..." id="fmsg"></textarea></div>
+      <button class="btn-send" onclick="sendMsg()">Send Message ✉️</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Pulkit<span>.</span>Kangra</div>
+      <div class="footer-desc">Professional websites for every budget. Based in Ambala, serving clients across India and worldwide.</div>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#calculator">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:pulkitkangra1@gmail.com">pulkitkangra1@gmail.com</a>
+      <a href="https://wa.me/919813076190" target="_blank">+91 98130 76190</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Pulkit Kangra. All rights reserved.</span>
+    <span>Built with ❤️ in Ambala, India</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">✅ Message sent! I'll reply within a few hours.</div>
+
+<script>
+// Hamburger menu
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+
+// Cursor
+const cur = document.getElementById('cur');
+const curR = document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.transform=`translate(${mx-5}px,${my-5}px)`; });
+(function animR(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; curR.style.transform=`translate(${rx-20}px,${ry-20}px)`; requestAnimationFrame(animR); })();
+
+// Scroll reveal
+const revEls = document.querySelectorAll('.rev');
+const obs = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }); },{threshold:0.12});
+revEls.forEach(el=>obs.observe(el));
+
+// Contact form
+function sendMsg(){
+  const name=document.getElementById('fname').value;
+  const phone=document.getElementById('fphone').value;
+  const email=document.getElementById('femail').value;
+  const service=document.getElementById('fservice').value;
+  const msg=document.getElementById('fmsg').value;
+  if(!name||!email||!msg){ alert('Please fill in your name, email and message!'); return; }
+  const wa=`Hi Pulkit! I found your portfolio.\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\nMessage: ${msg}`;
+  window.open(`https://wa.me/919813076190?text=${encodeURIComponent(wa)}`,'_blank');
+  const toast=document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),4000);
+}
+
+// ===== PRICE CALCULATOR =====
+let calcState = { type: null, typeName: '', basePrice: 0, pages: 3, features: [] };
+
+function roundTo500(n) { return Math.round(n / 500) * 500; }
+
+function setType(el, price, name) {
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  calcState.basePrice = price;
+  calcState.typeName = name;
+  updateCalc();
+}
+
+function changePage(delta) {
+  calcState.pages = Math.max(1, Math.min(20, calcState.pages + delta));
+  document.getElementById('pageCount').textContent = calcState.pages;
+  if (calcState.basePrice > 0) updateCalc();
+}
+
+function toggleCheck(label) {
+  label.classList.toggle('checked');
+  const priceEl = label.querySelector('.check-price');
+  const price = parseInt(priceEl.dataset.price);
+  const name = label.querySelector('.check-label').textContent.trim();
+  if (label.classList.contains('checked')) {
+    calcState.features.push({ price, name });
+  } else {
+    calcState.features = calcState.features.filter(f => f.name !== name);
+  }
+  if (calcState.basePrice > 0) updateCalc();
+}
+
+function updateCalc() {
+  const extraPages = Math.max(0, calcState.pages - 3);
+  const pagesCost = extraPages * 1500;
+  const featuresCost = calcState.features.reduce((s, f) => s + f.price, 0);
+  const subtotal = calcState.basePrice + pagesCost + featuresCost;
+  const low = roundTo500(subtotal * 0.9);
+  const high = roundTo500(subtotal * 1.2);
+  const deliveryMap = { 'Static / Portfolio': '3–5 days', 'Business Website': '7–14 days', 'E-Commerce Store': '3–5 weeks', 'Custom Web App': '6–12 weeks' };
+  let delivery = deliveryMap[calcState.typeName] || '7–14 days';
+  const hasComplex = calcState.features.some(f => f.name.includes('SEO') || f.name.includes('Content'));
+  if (hasComplex) delivery += ' + 3–5 days';
+  let breakdownHTML = `<div class="breakdown-item"><span>${calcState.typeName} (base)</span><span class="bi-val">₹${calcState.basePrice.toLocaleString('en-IN')}</span></div>`;
+  if (extraPages > 0) breakdownHTML += `<div class="breakdown-item"><span>${extraPages} extra page${extraPages > 1 ? 's' : ''}</span><span class="bi-val">+₹${pagesCost.toLocaleString('en-IN')}</span></div>`;
+  calcState.features.forEach(f => { breakdownHTML += `<div class="breakdown-item"><span>${f.name}</span><span class="bi-val">+₹${f.price.toLocaleString('en-IN')}</span></div>`; });
+  document.getElementById('breakdownItems').innerHTML = breakdownHTML;
+  document.getElementById('subtotalEl').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+  document.getElementById('resultLow').textContent = `₹${low.toLocaleString('en-IN')}`;
+  document.getElementById('resultHigh').textContent = `₹${high.toLocaleString('en-IN')}`;
+  document.getElementById('deliveryText').textContent = `Estimated delivery: ${delivery}`;
+  document.getElementById('resultEmpty').style.display = 'none';
+  document.getElementById('resultPrices').style.display = 'block';
+}
+
+function getQuote() {
+  const extraPages = Math.max(0, calcState.pages - 3);
+  const pagesCost = extraPages * 1500;
+  const featuresCost = calcState.features.reduce((s, f) => s + f.price, 0);
+  const subtotal = calcState.basePrice + pagesCost + featuresCost;
+  const low = roundTo500(subtotal * 0.9);
+  const high = roundTo500(subtotal * 1.2);
+  const featureList = calcState.features.length > 0 ? calcState.features.map(f => f.name.replace(/^[^\w]+/, '').trim()).join(', ') : 'None';
+  const msg = `Hi Pulkit! I used your price calculator.\n\n🌐 Website Type: ${calcState.typeName}\n📄 Pages: ${calcState.pages}\n⚙️ Features: ${featureList}\n💰 My Budget Range: ₹${low.toLocaleString('en-IN')} – ₹${high.toLocaleString('en-IN')}\n\nCan we discuss my project?`;
+  window.open(`https://wa.me/919813076190?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function resetCalc() {
+  calcState = { type: null, typeName: '', basePrice: 0, pages: 3, features: [] };
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.calc-check').forEach(c => c.classList.remove('checked'));
+  document.getElementById('pageCount').textContent = '3';
+  document.getElementById('resultEmpty').style.display = 'block';
+  document.getElementById('resultPrices').style.display = 'none';
+}
+</script>
+</body>
+</html>
